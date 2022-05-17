@@ -1,0 +1,41 @@
+*.iml
+
+# Gradle files
+.gradle
+/build
+
+# Local config file
+/local.properties
+
+#Intellij IDEA stuff
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/tasks.xml
+/.idea/datasources.xml
+/.idea/dataSources.ids
+
+# Mac clutter
+.DS_Store
+
+# Windows clutter
+Thumbs.db
+
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Specialised Kotlin class files
+*.class
+
+# built app files
+*.apk
+*.ap_
+
+# generated files
+bin/
+gen/

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SpellBooks</string>
+    <string name="username_placeholder">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="create_account_note">Not a registered wizard?</string>
+    <string name="create_account_link"><u>Create a new account!</u></string>
+</resources>
