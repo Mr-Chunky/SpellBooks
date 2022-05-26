@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 
-class BookAdapter(context: Context, val booklist: ArrayList<BookModelClass>) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
+class BookAdapter(context: Context, private val bookList: ArrayList<BookModelClass>) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
 
     private lateinit var selectListener: onItemSelectedListener
 
@@ -39,7 +39,7 @@ class BookAdapter(context: Context, val booklist: ArrayList<BookModelClass>) : R
     }
 
     override fun onBindViewHolder(holder: BookAdapter.ViewHolder, position: Int) {
-        val book: BookModelClass = booklist[position]
+        val book: BookModelClass = bookList[position]
         holder.tvListBookTitle.text = book.bookTitle
         holder.tvListBookAuthor.text = book.bookAuthor
 
@@ -71,6 +71,6 @@ class BookAdapter(context: Context, val booklist: ArrayList<BookModelClass>) : R
     }
 
     override fun getItemCount(): Int {
-        return booklist.size
+        return bookList.size
     }
 }
