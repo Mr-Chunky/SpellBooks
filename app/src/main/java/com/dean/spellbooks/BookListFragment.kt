@@ -75,7 +75,7 @@ class BookListFragment : Fragment() {
 
         adapter.setOnItemSelectedListener(object: BookAdapter.onItemSelectedListener {
             override fun onItemSelected(position: Int) {
-                var book = bookList[position]
+                val book = bookList[position]
                 MainActivity.bookID = book.bookID
 
                 navigationController!!.navigate(R.id.action_bookListFragment_to_editBookFragment)

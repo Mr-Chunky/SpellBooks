@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var userID: Int? = null
         var bookID: Int? = null
-        var checkCount: Int? = 0
     }
 
 

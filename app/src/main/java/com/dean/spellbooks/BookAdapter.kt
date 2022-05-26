@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 class BookAdapter(context: Context, private val bookList: ArrayList<BookModelClass>) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
 
     private lateinit var selectListener: onItemSelectedListener
+    private lateinit var dbHandler: DBHandler
 
     interface onItemSelectedListener {
         fun onItemSelected(position: Int)
@@ -43,29 +44,20 @@ class BookAdapter(context: Context, private val bookList: ArrayList<BookModelCla
         holder.tvListBookTitle.text = book.bookTitle
         holder.tvListBookAuthor.text = book.bookAuthor
 
-        if (PreferenceManager.getDefaultSharedPreferences(holder.cbBookRead.context).getBoolean("cbBookRead", true)) {
-            holder.cbBookRead.isChecked = true
-            MainActivity.checkCount?.plus(1)
-        }
-        else if(PreferenceManager.getDefaultSharedPreferences(holder.cbBookRead.context).getBoolean("cbBookRead", false)) {
-            holder.cbBookRead.isChecked = false
-            if (MainActivity.checkCount!! > 0) {
-                MainActivity.checkCount?.minus(1)
-            }
-        }
+        holder.cbBookRead.isChecked = book.readStatus == 1
 
-
+        dbHandler = DBHandler(holder.itemView.context)
 
         holder.cbBookRead.setOnClickListener {
 
             if (holder.cbBookRead.isChecked) {
-                MainActivity.checkCount?.plus(1)
-                PreferenceManager.getDefaultSharedPreferences(holder.cbBookRead.context).edit()
-                    .putBoolean("cbBookRead", true).apply()
+                book.readStatus = 1
+
+                val wiz: UserModelClass = dbHandler.getWizard(book.bookOwner)!!
+                wiz.recentBook = book.bookID
             }
             else if (!holder.cbBookRead.isChecked) {
-                PreferenceManager.getDefaultSharedPreferences(holder.cbBookRead.context).edit()
-                    .putBoolean("cbBookRead", false).apply()
+                book.readStatus = 0
             }
         }
     }

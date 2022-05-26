@@ -84,7 +84,7 @@ class CreateBookFragment : Fragment(), View.OnClickListener {
             val dbHandler: DBHandler = DBHandler(requireContext())
 
             val status = dbHandler.addBook(BookModelClass(null, bookTitle, bookAuthor, bookPages,
-                bookGenre, bookPublisher, bookYearPublished, ISBN, bookStarRating, MainActivity.userID!!))
+                bookGenre, bookPublisher, bookYearPublished, ISBN, bookStarRating, 0, MainActivity.userID!!))
 
             if (status > -1) {
                 Toast.makeText(requireContext(), "Successfully added book to list", Toast.LENGTH_SHORT).show()

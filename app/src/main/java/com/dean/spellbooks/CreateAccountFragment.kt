@@ -29,9 +29,8 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_create_account, container, false)
 
-        return view
+        return inflater.inflate(R.layout.fragment_create_account, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,7 +72,7 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
             val dbHandler: DBHandler = DBHandler(requireContext())
 
             val status = dbHandler.registerWizard(UserModelClass(null, username, password,
-                favouriteGenre, favouriteBook, bookGoal, pageGoal))
+                favouriteGenre, favouriteBook, bookGoal, pageGoal, null))
 
             if (status > -1) {
                 Toast.makeText(requireContext(), "Successfully added new wizard! Please login to continue.", Toast.LENGTH_SHORT).show()
