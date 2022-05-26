@@ -14,7 +14,7 @@ import androidx.navigation.fragment.navArgs
 
 class CreateBookFragment : Fragment(), View.OnClickListener {
 
-    var navigationController: NavController? = null
+    private var navigationController: NavController? = null
 
     private lateinit var etCreateBookTitle: EditText
     private lateinit var etCreateBookAuthor: EditText
@@ -32,8 +32,8 @@ class CreateBookFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_create_book, container, false)
-        return view
+
+        return inflater.inflate(R.layout.fragment_create_book, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
