@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.dean.spellbooks.CreateAccountFragment"
+        android:label="@string/account_creation"
+        tools:layout="@layout/fragment_create_account" >
+        <action
+            android:id="@+id/action_createAccountFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.dean.spellbooks.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_createAccountFragment"
+            app:destination="@id/createAccountFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_accountDetailsFragment"
+            app:destination="@id/accountDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountDetailsFragment"
+        android:name="com.dean.spellbooks.AccountDetailsFragment"
+        android:label="fragment_account_details"
+        tools:layout="@layout/fragment_account_details" >
+        <action
+            android:id="@+id/action_accountDetailsFragment_to_editAccountFragment"
+            app:destination="@id/editAccountFragment" />
+        <action
+            android:id="@+id/action_accountDetailsFragment_to_bookListFragment"
+            app:destination="@id/bookListFragment" />
+        <action
+            android:id="@+id/action_accountDetailsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editAccountFragment"
+        android:name="com.dean.spellbooks.EditAccountFragment"
+        android:label="fragment_edit_account"
+        tools:layout="@layout/fragment_edit_account" >
+        <action
+            android:id="@+id/action_editAccountFragment_to_bookListFragment"
+            app:destination="@id/bookListFragment" />
+        <action
+            android:id="@+id/action_editAccountFragment_to_accountDetailsFragment"
+            app:destination="@id/accountDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookListFragment"
+        android:name="com.dean.spellbooks.BookListFragment"
+        android:label="fragment_book_list"
+        tools:layout="@layout/fragment_book_list" >
+        <action
+            android:id="@+id/action_bookListFragment_to_editAccountFragment"
+            app:destination="@id/editAccountFragment" />
+        <action
+            android:id="@+id/action_bookListFragment_to_accountDetailsFragment"
+            app:destination="@id/accountDetailsFragment" />
+        <action
+            android:id="@+id/action_bookListFragment_to_createBookFragment"
+            app:destination="@id/createBookFragment" />
+        <action
+            android:id="@+id/action_bookListFragment_to_editBookFragment"
+            app:destination="@id/editBookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createBookFragment"
+        android:name="com.dean.spellbooks.CreateBookFragment"
+        android:label="fragment_create_book"
+        tools:layout="@layout/fragment_create_book" >
+        <action
+            android:id="@+id/action_createBookFragment_to_bookListFragment"
+            app:destination="@id/bookListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editBookFragment"
+        android:name="com.dean.spellbooks.EditBookFragment"
+        android:label="fragment_edit_book"
+        tools:layout="@layout/fragment_edit_book" >
+        <action
+            android:id="@+id/action_editBookFragment_to_bookListFragment"
+            app:destination="@id/bookListFragment" />
+    </fragment>
+</navigation>
