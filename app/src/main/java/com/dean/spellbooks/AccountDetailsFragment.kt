@@ -25,10 +25,6 @@ class AccountDetailsFragment : Fragment(), View.OnClickListener {
     private lateinit var tvPagesGoalIndicator: TextView
     private lateinit var tvMostReadGenreIndicator: TextView
     private lateinit var tvRecentBookIndicator: TextView
-    private lateinit var etPagesProgressEdit: EditText
-    private lateinit var ibConfirmPagesProgressEdit: ImageButton
-    private lateinit var ibCancelPagesProgressEdit: ImageButton
-    private lateinit var btnEditPagesProgress: Button
     private lateinit var btnLogOut: Button
 
     override fun onCreateView(
@@ -47,10 +43,9 @@ class AccountDetailsFragment : Fragment(), View.OnClickListener {
          dbHandler = DBHandler(requireContext())
 
         initialiseUIElements(view)
-        setOptionalElementsVisibility(false)
-        setUpButtonClickListeners()
+        setUpButtonClickListener()
 
-        tvBooksProgressIndicator.text = MainActivity.checkCount.toString()
+        tvBooksProgressIndicator.text = 0.toString()
         tvMostReadGenreIndicator.text = dbHandler!!.getUserFavGenre(MainActivity.userID!!)
         tvRecentBookIndicator.text = dbHandler!!.getUserFavBook(MainActivity.userID!!)
 
@@ -85,71 +80,18 @@ class AccountDetailsFragment : Fragment(), View.OnClickListener {
         tvPagesGoalIndicator = view.findViewById(R.id.tvPagesGoalIndicator)
         tvMostReadGenreIndicator = view.findViewById(R.id.tvMostReadGenreIndicator)
         tvRecentBookIndicator = view.findViewById(R.id.tvRecentBookIndicator)
-        etPagesProgressEdit = view.findViewById(R.id.etPagesProgressEdit)
-        ibConfirmPagesProgressEdit = view.findViewById(R.id.ibConfirmPagesProgressEdit)
-        ibCancelPagesProgressEdit = view.findViewById(R.id.ibCancelPagesProgressEdit)
-        btnEditPagesProgress = view.findViewById(R.id.btnEditPagesProgress)
         btnLogOut = view.findViewById(R.id.btnLogOut)
     }
 
-    private fun setOptionalElementsVisibility(visibility: Boolean) {
-        if (visibility) {
-            ibConfirmPagesProgressEdit.visibility = View.VISIBLE
-            ibCancelPagesProgressEdit.visibility = View.VISIBLE
-            etPagesProgressEdit.visibility = View.VISIBLE
-        }
-        else if (!visibility) {
-            ibConfirmPagesProgressEdit.visibility = View.GONE
-            ibCancelPagesProgressEdit.visibility = View.GONE
-            etPagesProgressEdit.visibility = View.GONE
-        }
-    }
-
-    private fun setUpButtonClickListeners() {
-        btnEditPagesProgress.setOnClickListener(this)
+    private fun setUpButtonClickListener() {
         btnLogOut.setOnClickListener(this)
-    }
-
-    private fun clearEditField() {
-        etPagesProgressEdit.text.clear()
     }
 
     override fun onClick(p0: View?) {
         when(p0) {
-            btnEditPagesProgress -> {
-                btnEditPagesProgress.visibility = View.GONE
-                setOptionalElementsVisibility(true)
-
-                ibCancelPagesProgressEdit.setOnClickListener(View.OnClickListener {
-                    clearEditField()
-                    setOptionalElementsVisibility(false)
-                    btnEditPagesProgress.visibility = View.VISIBLE
-
-                    Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
-
-                ibConfirmPagesProgressEdit.setOnClickListener(View.OnClickListener {
-                    val pagesProgress = etPagesProgressEdit.text.toString().toInt()
-
-                    if (pagesProgress.toString().isNotEmpty()) {
-
-                        clearEditField()
-                        setOptionalElementsVisibility(false)
-                        tvPagesProgressIndicator.text = pagesProgress.toString()
-                        btnEditPagesProgress.visibility = View.VISIBLE
-                        val booksGoal: Int = dbHandler!!.getUserBookGoal(MainActivity.userID!!)
-                        val booksFinished: Int = tvBooksProgressIndicator.text.toString().toInt()
-                        tvBooksGoalIndicator.text = (booksGoal - booksFinished).toString()
-
-                        Toast.makeText(requireContext(), "Successfully updated current pages progress", Toast.LENGTH_SHORT).show()
-                    }
-                })
-
-            }
             btnLogOut -> {
                 MainActivity.userID = null
                 MainActivity.bookID = null
-                MainActivity.checkCount = 0
                 navigationController!!.navigate(R.id.action_accountDetailsFragment_to_loginFragment)
                 Toast.makeText(requireContext(), "Successfully logged out of the app.  Goodbye", Toast.LENGTH_SHORT).show()
             }

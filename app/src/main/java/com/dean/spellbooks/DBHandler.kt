@@ -482,8 +482,6 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         return bookGoal
     }
 
-    // TODO: PERFORM CALCULATION TO GET REMAINING BOOKS AND PAGES TOWARD BOOK/PAGE GOAL
-
     fun getUserPageGoal(userID: Int): Int {
         var pageGoal: Int = 0
 
@@ -746,5 +744,94 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         cursor.close()
         database.close()
         return bookReadStatus
+    }
+
+    private fun getUserCompletedBooks(userID: Int): ArrayList<BookModelClass> {
+        val completedBooks: ArrayList<BookModelClass> = ArrayList()
+
+        val select = "SELECT * FROM $TABLE_BOOKS WHERE $KEY_BOOK_READ_STATUS = ? AND $KEY_BOOK_OWNER = ?"
+
+        val database = this.readableDatabase
+
+        var cursor: Cursor? = null
+
+        try {
+            cursor = database.rawQuery(select, arrayOf("1", userID.toString()))
+        } catch (exception: SQLiteException) {
+            Log.e("sqlite", "Unable to get completed books for the specified user")
+        }
+
+        var _bookID: Int
+        var bookTitle: String
+        var bookAuthor: String
+        var bookNumberOfPages: Int
+        var bookGenre: String
+        var bookPublisher: String
+        var bookYearPublished: Int
+        var bookISBN: String
+        var bookStarRating: Float
+        var bookReadStatus: Int
+        var bookOwner: Int
+
+        if (cursor!!.moveToFirst()) {
+            do {
+                _bookID = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BOOK_ID))
+                bookTitle = cursor.getString(cursor.getColumnIndexOrThrow(KEY_BOOK_TITLE))
+                bookAuthor = cursor.getString(cursor.getColumnIndexOrThrow(KEY_BOOK_AUTHOR))
+                bookNumberOfPages = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BOOK_PAGES))
+                bookGenre = cursor.getString(cursor.getColumnIndexOrThrow(KEY_BOOK_GENRE))
+                bookPublisher = cursor.getString(cursor.getColumnIndexOrThrow(KEY_BOOK_PUBLISHER))
+                bookYearPublished = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BOOK_YEAR_PUBLISHED))
+                bookISBN = cursor.getString(cursor.getColumnIndexOrThrow(KEY_BOOK_ISBN))
+                bookStarRating = cursor.getFloat(cursor.getColumnIndexOrThrow(KEY_BOOK_RATING))
+                bookReadStatus = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BOOK_READ_STATUS))
+                bookOwner = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BOOK_OWNER))
+
+                val book = BookModelClass(_bookID, bookTitle, bookAuthor, bookNumberOfPages, bookGenre,
+                    bookPublisher, bookYearPublished, bookISBN, bookStarRating, bookReadStatus, bookOwner)
+                completedBooks.add(book)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        database.close()
+        return completedBooks
+    }
+
+    // Receives completedBooks ArrayList from the getUserCompletedBooks() function
+    fun calculateRemainingGoalBooks(userID: Int, completedBooks: ArrayList<BookModelClass>): Int {
+        val remainingBooks: Int
+        val totalGoalBooks: Int = getUserBookGoal(userID)
+        var booksCompleted: Int = 0
+
+        for (book in completedBooks) {
+            if (book.readStatus == 1)
+                booksCompleted++
+        }
+
+        remainingBooks = if ((totalGoalBooks - booksCompleted) >= 0)
+            totalGoalBooks - booksCompleted
+        else
+            0
+
+        return remainingBooks
+    }
+
+    // Receives completedBooks ArrayList from the getUserCompletedBooks() function
+    fun calculateRemainingGoalPages(userID: Int, completedBooks: ArrayList<BookModelClass>): Int {
+        val remainingPages: Int
+        val totalGoalPages: Int = getUserPageGoal(userID)
+        var pagesCompleted: Int = 0
+
+        for (book in completedBooks) {
+            if (book.readStatus == 1)
+                pagesCompleted += book.bookNumberOfPages
+        }
+
+        remainingPages = if ((totalGoalPages - pagesCompleted) >= 0)
+            totalGoalPages - pagesCompleted
+        else
+            0
+
+        return remainingPages
     }
 }
