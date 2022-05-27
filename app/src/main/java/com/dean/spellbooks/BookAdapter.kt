@@ -55,9 +55,13 @@ class BookAdapter(context: Context, private val bookList: ArrayList<BookModelCla
 
                 val wiz: UserModelClass = dbHandler.getWizard(book.bookOwner)!!
                 wiz.recentBook = book.bookID
+
+                dbHandler.updateWizardInformation(wiz)
+                dbHandler.updateBookInformation(book)
             }
             else if (!holder.cbBookRead.isChecked) {
                 book.readStatus = 0
+                dbHandler.updateBookInformation(book)
             }
         }
     }
