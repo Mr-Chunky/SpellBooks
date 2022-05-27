@@ -98,70 +98,14 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/tvPagesProgressIndicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
-
-            <TextView
-                android:id="@+id/tvPagesProgressIndicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="17dp"
-                android:text="0"
-                android:textColor="@color/white" />
-
-            <EditText
-                android:id="@+id/etPagesProgressEdit"
-                android:layout_width="55dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="28dp"
-                android:layout_toEndOf="@+id/tvPagesProgressIndicator"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="#"
-                android:inputType="number"
-                android:textColorHint="@color/white"
-                android:importantForAutofill="no" />
-
-            <ImageButton
-                android:id="@+id/ibConfirmPagesProgressEdit"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="90dp"
-                android:layout_marginTop="0dp"
-                android:layout_toEndOf="@+id/etPagesProgressEdit"
-                android:contentDescription="@string/confirm"
-                android:src="@drawable/ic_custom_check_mark" />
-
-            <ImageButton
-                android:id="@+id/ibCancelPagesProgressEdit"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="9dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="11dp"
-                android:layout_toStartOf="@+id/btnEditPagesProgress"
-                android:layout_toEndOf="@+id/ibConfirmPagesProgressEdit"
-                android:contentDescription="@android:string/cancel"
-                android:src="@drawable/ic_custom_x"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <Button
-                android:id="@+id/btnEditPagesProgress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:backgroundTint="@color/white"
-                android:text="@string/edit"
-                android:textColor="@color/black" />
-        </RelativeLayout>
+            android:layout_marginBottom="5dp"
+            android:text="0"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tvPagesGoalHeading"
