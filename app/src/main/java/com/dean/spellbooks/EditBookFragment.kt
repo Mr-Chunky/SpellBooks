@@ -81,6 +81,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 llEditBookButtonBar.visibility = View.GONE
                 btnEditBookCancel.visibility = View.GONE
                 btnEditBookSave.visibility = View.GONE
+                btnEditBookReturn.visibility = View.VISIBLE
             }
             1 -> {
                 llEditBookSpinnerHolder.visibility = View.GONE
@@ -88,6 +89,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 llEditBookButtonBar.visibility = View.VISIBLE
                 btnEditBookCancel.visibility = View.VISIBLE
                 btnEditBookSave.visibility = View.VISIBLE
+                btnEditBookReturn.visibility = View.GONE
             }
             2 -> {
                 llEditBookSpinnerHolder.visibility = View.VISIBLE
@@ -95,6 +97,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 llEditBookButtonBar.visibility = View.VISIBLE
                 btnEditBookCancel.visibility = View.VISIBLE
                 btnEditBookSave.visibility = View.VISIBLE
+                btnEditBookReturn.visibility = View.GONE
             }
         }
     }
