@@ -850,7 +850,6 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
                 religiousCount > scienceFictionCount && religiousCount > romanceCount && religiousCount > selfHelpCount)
             return "Religious"
 
-        // TODO: IMPLEMENT A SPINNER FOR PRE-DEFINED GENRE VALUES AND GET THEM HERE
         return "No genre is read more than another"
     }
 
@@ -890,5 +889,16 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
             0
 
         return remainingPages
+    }
+
+    // Receives completedBooks ArrayList from the getUserCompletedBooks() function
+    fun calculatePagesProgress(completedBooks: ArrayList<BookModelClass>): Int {
+        var pagesProgress: Int = 0
+
+        if (completedBooks.isNotEmpty()) {
+            for (book in completedBooks)
+                pagesProgress += book.bookNumberOfPages
+        }
+        return pagesProgress
     }
 }

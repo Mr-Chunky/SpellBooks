@@ -54,4 +54,15 @@
     <string name="edit_book_info">Edit Book Info</string>
     <string name="return_to_previous">Return</string>
     <string name="back">Back</string>
+    <string name="select_a_genre">Select a genre</string>
+    <string-array name="book_genres">
+        <item name="Fantasy">Fantasy</item>
+        <item name="Horror">Horror</item>
+        <item name="Children">Children</item>
+        <item name="Non-fiction">Non-fiction</item>
+        <item name="Science Fiction">Science Fiction</item>
+        <item name="Romance">Romance</item>
+        <item name="Self-Help">Self-Help</item>
+        <item name="Religious">Religious</item>
+    </string-array>
 </resources>

@@ -12,14 +12,17 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class EditAccountFragment : Fragment(), View.OnClickListener {
+class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private var navigationController: NavController? = null
     private var dbHandler: DBHandler? = null
 
     private lateinit var btnEditAccountCancel: Button
     private lateinit var btnEditAccountSave: Button
+    private lateinit var genres: Array<out String>
+    private lateinit var spinnerText: String
     // All of the below UI elements will be programmed in pairs
+    private lateinit var spinEditAccountGenre: Spinner; private lateinit var llEditAccountSpinnerHolder: LinearLayout
     private lateinit var etEditAccountValue: EditText; private lateinit var llEditAccountButtonBar: LinearLayout
     private lateinit var btnEditAccountUsername: Button; private lateinit var tvEditAccountUsername: TextView
     private lateinit var btnEditAccountPassword: Button; private lateinit var tvEditAccountPassword: TextView
@@ -33,8 +36,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_edit_account, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_edit_account, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,9 +46,11 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
 
         initialiseUIElements(view)
 
-        setOptionalElementsVisibility(false)
+        setOptionalElementsVisibility(0)
 
         setUpTextViewTexts()
+
+        setUpGenreSpinner()
 
         setUpButtonClickListeners()
 
@@ -69,6 +73,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
     private fun initialiseUIElements(view: View) {
         btnEditAccountCancel = view.findViewById(R.id.btnEditAccountCancel)
         btnEditAccountSave = view.findViewById(R.id.btnEditAccountSave)
+        spinEditAccountGenre = view.findViewById(R.id.spinEditAccountGenre); llEditAccountSpinnerHolder = view.findViewById(R.id.llEditAccountSpinnerHolder)
         etEditAccountValue = view.findViewById(R.id.etEditAccountValue); llEditAccountButtonBar = view.findViewById(R.id.llEditAccountButtonBar)
         btnEditAccountUsername = view.findViewById(R.id.btnEditAccountUsername); tvEditAccountUsername = view.findViewById(R.id.tvEditAccountUsername)
         btnEditAccountPassword = view.findViewById(R.id.btnEditAccountPassword); tvEditAccountPassword = view.findViewById(R.id.tvEditAccountPassword)
@@ -87,6 +92,14 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
         tvEditAccountPageGoal.text = dbHandler!!.getUserPageGoal(MainActivity.userID!!).toString()
     }
 
+    private fun setUpGenreSpinner() {
+        genres = resources.getStringArray(R.array.book_genres)
+        val spinnerAdapter: ArrayAdapter<CharSequence> = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, genres)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinEditAccountGenre.adapter = spinnerAdapter
+        spinEditAccountGenre.onItemSelectedListener = this
+    }
+
     private fun setUpButtonClickListeners() {
         btnEditAccountUsername.setOnClickListener(this)
         btnEditAccountPassword.setOnClickListener(this)
@@ -96,12 +109,23 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
         btnEditAccountPageGoal.setOnClickListener(this)
     }
 
-    private fun setOptionalElementsVisibility(visibility: Boolean) {
-        if (visibility) {
-            etEditAccountValue.visibility = View.VISIBLE; llEditAccountButtonBar.visibility = View.VISIBLE
-        }
-        else if (!visibility) {
-            etEditAccountValue.visibility = View.GONE; llEditAccountButtonBar.visibility = View.GONE
+    private fun setOptionalElementsVisibility(visibility: Int) {
+        when (visibility) {
+            0 -> {
+                etEditAccountValue.visibility = View.GONE
+                llEditAccountButtonBar.visibility = View.GONE
+                llEditAccountSpinnerHolder.visibility = View.GONE
+            }
+            1 -> {
+                etEditAccountValue.visibility = View.VISIBLE
+                llEditAccountButtonBar.visibility = View.VISIBLE
+                llEditAccountSpinnerHolder.visibility = View.GONE
+            }
+            2 -> {
+                etEditAccountValue.visibility = View.GONE
+                llEditAccountButtonBar.visibility = View.VISIBLE
+                llEditAccountSpinnerHolder.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -114,11 +138,11 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
             btnEditAccountUsername -> {
 
                 btnEditAccountUsername.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
+                    setOptionalElementsVisibility(0)
                     btnEditAccountUsername.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
@@ -135,7 +159,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
                             wiz.username = newUsername
                             dbHandler!!.updateWizardInformation(wiz)
                             clearEditField()
-                            setOptionalElementsVisibility(false)
+                            setOptionalElementsVisibility(0)
                             tvEditAccountUsername.text = dbHandler!!.getUsername(MainActivity.userID!!)
                             btnEditAccountUsername.visibility = View.VISIBLE
 
@@ -146,11 +170,11 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
             }
             btnEditAccountPassword -> {
                 btnEditAccountPassword.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
+                    setOptionalElementsVisibility(0)
                     btnEditAccountPassword.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
@@ -167,7 +191,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
                             wiz.password = newPassword
                             dbHandler!!.updateWizardInformation(wiz)
                             clearEditField()
-                            setOptionalElementsVisibility(false)
+                            setOptionalElementsVisibility(0)
                             tvEditAccountPassword.text = dbHandler!!.getUserPassword(MainActivity.userID!!)
                             btnEditAccountPassword.visibility = View.VISIBLE
 
@@ -178,28 +202,28 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
             }
             btnEditAccountFavGenre -> {
                 btnEditAccountFavGenre.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(2)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
+                    setOptionalElementsVisibility(0)
                     btnEditAccountFavGenre.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
                 })
 
                 btnEditAccountSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty())
+                    if (spinnerText.isEmpty())
                         Toast.makeText(requireContext(), "Favourite Genre field cannot be blank", Toast.LENGTH_SHORT).show()
                     else {
                         val wiz: UserModelClass = dbHandler!!.getWizard(MainActivity.userID!!)!!
-                        val newFavGenre: String = etEditAccountValue.text.toString()
+                        val newFavGenre: String = spinnerText
 
                         if (newFavGenre.isNotEmpty()) {
                             wiz.favouriteGenre = newFavGenre
                             dbHandler!!.updateWizardInformation(wiz)
                             clearEditField()
-                            setOptionalElementsVisibility(false)
+                            setOptionalElementsVisibility(0)
                             tvEditAccountFavGenre.text = dbHandler!!.getUserFavGenre(MainActivity.userID!!)
                             btnEditAccountFavGenre.visibility = View.VISIBLE
 
@@ -210,11 +234,11 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
             }
             btnEditAccountFavBook -> {
                 btnEditAccountFavBook.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
+                    setOptionalElementsVisibility(0)
                     btnEditAccountFavBook.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
@@ -231,7 +255,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
                             wiz.favouriteBook = newFavBook
                             dbHandler!!.updateWizardInformation(wiz)
                             clearEditField()
-                            setOptionalElementsVisibility(false)
+                            setOptionalElementsVisibility(0)
                             tvEditAccountFavBook.text = dbHandler!!.getUserFavBook(MainActivity.userID!!)
                             btnEditAccountFavBook.visibility = View.VISIBLE
 
@@ -242,11 +266,11 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
             }
             btnEditAccountBookGoal -> {
                 btnEditAccountBookGoal.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
+                    setOptionalElementsVisibility(0)
                     btnEditAccountBookGoal.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
@@ -263,7 +287,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
                             wiz.booksReadingGoal = newBookGoal
                             dbHandler!!.updateWizardInformation(wiz)
                             clearEditField()
-                            setOptionalElementsVisibility(false)
+                            setOptionalElementsVisibility(0)
                             tvEditAccountBookGoal.text = dbHandler!!.getUserBookGoal(MainActivity.userID!!).toString()
                             btnEditAccountBookGoal.visibility = View.VISIBLE
 
@@ -274,11 +298,11 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
             }
             btnEditAccountPageGoal -> {
                 btnEditAccountPageGoal.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
+                    setOptionalElementsVisibility(0)
                     btnEditAccountPageGoal.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
@@ -295,7 +319,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
                             wiz.pagesReadingGoal = newPageGoal
                             dbHandler!!.updateWizardInformation(wiz)
                             clearEditField()
-                            setOptionalElementsVisibility(false)
+                            setOptionalElementsVisibility(0)
                             tvEditAccountPageGoal.text = dbHandler!!.getUserPageGoal(MainActivity.userID!!).toString()
                             btnEditAccountPageGoal.visibility = View.VISIBLE
 
@@ -316,5 +340,13 @@ class EditAccountFragment : Fragment(), View.OnClickListener {
 
     private fun isNumeric(string: String): Boolean {
         return string.all { char -> char.isDigit() }
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        spinnerText = genres[p2].toString()
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        spinnerText = ""
     }
 }
