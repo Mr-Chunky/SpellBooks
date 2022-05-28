@@ -8,21 +8,18 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
-import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import org.w3c.dom.Text
 
 class AccountDetailsFragment : Fragment(), View.OnClickListener {
 
     private var navigationController: NavController? = null
     private var dbHandler: DBHandler? = null
 
+    private lateinit var pbBooksProgress: ProgressBar
+    private lateinit var pbPagesProgress: ProgressBar
     private lateinit var tvBooksProgressIndicator: TextView
-    private lateinit var tvBooksGoalIndicator: TextView
     private lateinit var tvPagesProgressIndicator: TextView
-    private lateinit var tvPagesGoalIndicator: TextView
     private lateinit var tvMostReadGenreIndicator: TextView
     private lateinit var tvRecentBookIndicator: TextView
     private lateinit var btnLogOut: Button
@@ -34,9 +31,7 @@ class AccountDetailsFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        val view: View = inflater.inflate(R.layout.fragment_account_details, container, false)
-
-        return view
+        return inflater.inflate(R.layout.fragment_account_details, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,10 +64,10 @@ class AccountDetailsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun initialiseUIElements(view: View) {
+        pbBooksProgress = view.findViewById(R.id.pbBooksProgress)
+        pbPagesProgress = view.findViewById(R.id.pbPagesProgress)
         tvBooksProgressIndicator = view.findViewById(R.id.tvBooksProgressIndicator)
-        tvBooksGoalIndicator = view.findViewById(R.id.tvBooksGoalIndicator)
         tvPagesProgressIndicator = view.findViewById(R.id.tvPagesProgressIndicator)
-        tvPagesGoalIndicator = view.findViewById(R.id.tvPagesGoalIndicator)
         tvMostReadGenreIndicator = view.findViewById(R.id.tvMostReadGenreIndicator)
         tvRecentBookIndicator = view.findViewById(R.id.tvRecentBookIndicator)
         btnLogOut = view.findViewById(R.id.btnLogOut)
@@ -81,31 +76,27 @@ class AccountDetailsFragment : Fragment(), View.OnClickListener {
     private fun setUpStats() {
         val completedBooksCount: Int = completedBooks.size
         val mostReadGenre: String = dbHandler!!.calculateMostReadGenre(completedBooks)
-        val remainingBooks: Int
-        val remainingPages: Int
         val pagesProgress: Int = dbHandler!!.calculatePagesProgress(completedBooks)
-        var recentBook: Int? = dbHandler!!.getUserRecentBook(MainActivity.userID!!)
+        val recentBook: Int? = dbHandler!!.getUserRecentBook(MainActivity.userID!!)
 
-        if (completedBooks.isEmpty()) {
-            remainingBooks = 0
-            remainingPages = 0
-        }
-        else {
-            remainingBooks = dbHandler!!.calculateRemainingGoalBooks(MainActivity.userID!!, completedBooks)
-            remainingPages = dbHandler!!.calculateRemainingGoalPages(MainActivity.userID!!, completedBooks)
-        }
-
-        tvBooksProgressIndicator.text = completedBooksCount.toString()
+        // Setting up the most read book genre indicator
         tvMostReadGenreIndicator.text = mostReadGenre
 
+        // Setting up the most recent book read indicator
         if (recentBook != null)
             tvRecentBookIndicator.text = dbHandler!!.getBookTitle(recentBook)
         else
             tvRecentBookIndicator.text = R.string.no_books_read.toString()
 
-        tvBooksGoalIndicator.text = remainingBooks.toString()
-        tvPagesGoalIndicator.text = remainingPages.toString()
-        tvPagesProgressIndicator.text = pagesProgress.toString()
+        // Setting up the books progress bar
+        pbBooksProgress.max = dbHandler!!.getUserBookGoal(MainActivity.userID!!)
+        pbBooksProgress.progress = completedBooksCount
+        tvBooksProgressIndicator.text = "${pbBooksProgress.progress}/${pbBooksProgress.max}" // TODO: FIND A BEST-PRACTICE WAY TO IMPLEMENT THIS
+
+        // Setting up the pages progress bar
+        pbPagesProgress.max = dbHandler!!.getUserPageGoal(MainActivity.userID!!)
+        pbPagesProgress.progress = pagesProgress
+        tvPagesProgressIndicator.text = "${pbPagesProgress.progress}/${pbPagesProgress.max}" // TODO: FIND A BEST-PRACTICE WAY TO IMPLEMENT THIS
     }
 
     private fun setUpButtonClickListener() {

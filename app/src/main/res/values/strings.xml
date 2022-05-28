@@ -27,7 +27,7 @@
     <string name="home">Home</string>
     <string name="press_to_add_a_book_to_the_recyclerview">Press to add a book to the RecyclerView</string>
     <string name="placeholder">Placeholder</string>
-    <string name="book_read">Book Read?</string>
+    <string name="book_read">Completed</string>
     <string name="add_book">Add Book</string>
     <string name="add">Add</string>
     <string name="title">Title</string>
@@ -55,6 +55,9 @@
     <string name="return_to_previous">Return</string>
     <string name="back">Back</string>
     <string name="select_a_genre">Select a genre</string>
+    <string name="book_goal_progress">Book Goal Progress</string>
+    <string name="page_goal_progress">Page Goal Progress</string>
+    <string name="an_image_of_the_book_being_shown">An image of the book being shown</string>
     <string-array name="book_genres">
         <item name="Fantasy">Fantasy</item>
         <item name="Horror">Horror</item>

@@ -60,69 +60,49 @@
         <TextView
             android:id="@+id/tvBooksProgressHeading"
             style="@style/info_field_text"
-            android:text="@string/books_completed_so_far" />
+            android:text="@string/book_goal_progress" />
+
+        <ProgressBar
+            android:id="@+id/pbBooksProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginTop="5dp"
+            android:indeterminate="false" />
 
         <TextView
             android:id="@+id/tvBooksProgressIndicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:text="0"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/tvBooksGoalHeading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/total_books_to_finish"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvBooksGoalIndicator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="0"
+            android:gravity="center"
+            android:text="@string/placeholder"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tvPagesProgressHeading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/pages_read_so_far"
+            android:text="@string/page_goal_progress"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/pbPagesProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginTop="5dp"
+            android:indeterminate="false" />
 
         <TextView
             android:id="@+id/tvPagesProgressIndicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:text="0"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/tvPagesGoalHeading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/total_pages_to_read"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvPagesGoalIndicator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="0"
+            android:gravity="center"
+            android:text="@string/placeholder"
             android:textColor="@color/white" />
 
         <TextView
