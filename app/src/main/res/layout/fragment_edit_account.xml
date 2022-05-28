@@ -8,48 +8,81 @@
     android:background="@color/grey"
     tools:context=".EditAccountFragment">
 
-    <EditText
-        android:id="@+id/etEditAccountValue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="@string/enter_a_new_value"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvEditAccountCard" />
-
     <LinearLayout
-        android:id="@+id/llEditAccountButtonBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/llEditAccountNavHolder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEditAccountValue"
-        app:layout_constraintVertical_bias="0.21">
+        app:layout_constraintTop_toBottomOf="@+id/cvEditAccountCard">
 
-        <Button
-            android:id="@+id/btnEditAccountCancel"
-            style="@style/cancel_button_style"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/etEditAccountValue"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@android:string/cancel" />
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:ems="10"
+            android:hint="@string/enter_a_new_value"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColorHint="@color/black"
+            tools:ignore="DuplicateClickableBoundsCheck" />
 
-        <Button
-            android:id="@+id/btnEditAccountSave"
-            style="@style/save_button_style"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/llEditAccountSpinnerHolder"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/save" />
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvEditAccountGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/select_a_genre"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinEditAccountGenre"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:contentDescription="@string/select_a_genre" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llEditAccountButtonBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnEditAccountCancel"
+                style="@style/cancel_button_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@android:string/cancel" />
+
+            <Button
+                android:id="@+id/btnEditAccountSave"
+                style="@style/save_button_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save" />
+        </LinearLayout>
     </LinearLayout>
 
     <androidx.cardview.widget.CardView

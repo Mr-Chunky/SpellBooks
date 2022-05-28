@@ -27,6 +27,8 @@ class AccountDetailsFragment : Fragment(), View.OnClickListener {
     private lateinit var tvRecentBookIndicator: TextView
     private lateinit var btnLogOut: Button
 
+    private lateinit var completedBooks: ArrayList<BookModelClass>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,34 +43,14 @@ class AccountDetailsFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         navigationController = Navigation.findNavController(view)
         dbHandler = DBHandler(requireContext())
-        val completedBooks: ArrayList<BookModelClass> = dbHandler!!.getUserCompletedBooks(MainActivity.userID!!)
-        val remainingBooks: Int
-        val remainingPages: Int
-        var recentBook: Int? = dbHandler!!.getUserRecentBook(MainActivity.userID!!)
+        completedBooks = dbHandler!!.getUserCompletedBooks(MainActivity.userID!!)
 
-        if (completedBooks.isEmpty()) {
-            remainingBooks = 0
-            remainingPages = 0
-        }
-        else {
-            remainingBooks = dbHandler!!.calculateRemainingGoalBooks(MainActivity.userID!!, completedBooks)
-            remainingPages = dbHandler!!.calculateRemainingGoalPages(MainActivity.userID!!, completedBooks)
-        }
 
         initialiseUIElements(view)
+
         setUpButtonClickListener()
 
-        tvBooksProgressIndicator.text = 0.toString() // TODO: GET COUNT OF ALL BOOKS IN completedBooks ARRAYLIST
-        tvMostReadGenreIndicator.text = dbHandler!!.getUserFavGenre(MainActivity.userID!!) // TODO: GET COUNT OF BOOKS WITH SPECIFIC GENRE in completedBooks ARRAYLIST
-
-        if (recentBook != null)
-            tvRecentBookIndicator.text = dbHandler!!.getBookTitle(recentBook)
-        else
-            tvRecentBookIndicator.text = R.string.no_books_read.toString()
-
-        tvBooksGoalIndicator.text = remainingBooks.toString()
-
-        tvPagesGoalIndicator.text = remainingPages.toString()
+        setUpStats()
 
         val bottomNav: BottomNavigationView? = view.findViewById(R.id.bnvStatsNavigation)
         bottomNav!!.setupWithNavController(navigationController!!)
@@ -94,6 +76,36 @@ class AccountDetailsFragment : Fragment(), View.OnClickListener {
         tvMostReadGenreIndicator = view.findViewById(R.id.tvMostReadGenreIndicator)
         tvRecentBookIndicator = view.findViewById(R.id.tvRecentBookIndicator)
         btnLogOut = view.findViewById(R.id.btnLogOut)
+    }
+
+    private fun setUpStats() {
+        val completedBooksCount: Int = completedBooks.size
+        val mostReadGenre: String = dbHandler!!.calculateMostReadGenre(completedBooks)
+        val remainingBooks: Int
+        val remainingPages: Int
+        val pagesProgress: Int = dbHandler!!.calculatePagesProgress(completedBooks)
+        var recentBook: Int? = dbHandler!!.getUserRecentBook(MainActivity.userID!!)
+
+        if (completedBooks.isEmpty()) {
+            remainingBooks = 0
+            remainingPages = 0
+        }
+        else {
+            remainingBooks = dbHandler!!.calculateRemainingGoalBooks(MainActivity.userID!!, completedBooks)
+            remainingPages = dbHandler!!.calculateRemainingGoalPages(MainActivity.userID!!, completedBooks)
+        }
+
+        tvBooksProgressIndicator.text = completedBooksCount.toString()
+        tvMostReadGenreIndicator.text = mostReadGenre
+
+        if (recentBook != null)
+            tvRecentBookIndicator.text = dbHandler!!.getBookTitle(recentBook)
+        else
+            tvRecentBookIndicator.text = R.string.no_books_read.toString()
+
+        tvBooksGoalIndicator.text = remainingBooks.toString()
+        tvPagesGoalIndicator.text = remainingPages.toString()
+        tvPagesProgressIndicator.text = pagesProgress.toString()
     }
 
     private fun setUpButtonClickListener() {

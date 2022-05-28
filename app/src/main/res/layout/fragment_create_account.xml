@@ -51,21 +51,39 @@
                 android:minHeight="48dp"
                 android:textColorHint="@color/black" />
 
-            <EditText
-                android:id="@+id/etNewFavouriteGenre"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="50dp"
                 android:layout_marginBottom="10dp"
-                android:ems="10"
-                android:hint="@string/favourite_genre"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:minHeight="48dp"
-                android:textColorHint="@color/black"
-                tools:ignore="TextContrastCheck" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNewGenre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:text="@string/favourite_genre"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:layout_gravity="center" />
+
+                <Spinner
+                    android:id="@+id/spinNewFavouriteGenre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/favourite_genre"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    android:textColorHint="@color/black"
+                    tools:ignore="TextContrastCheck,SpeakableTextPresentCheck" />
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/etNewFavouriteBook"

@@ -10,11 +10,14 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 
-class EditBookFragment : Fragment(), View.OnClickListener {
+class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
     var navigationController: NavController? = null
     var dbHandler: DBHandler? = null
 
+    private lateinit var genres: Array<out String>
+    private lateinit var spinnerText: String
     // These UI elements will be programmed in pairs
+    private lateinit var spinEditBookGenre: Spinner; private lateinit var llEditBookSpinnerHolder: LinearLayout
     private lateinit var etEditBookNewValue: EditText; private lateinit var llEditBookButtonBar: LinearLayout
     private lateinit var tvEditBookTitle: TextView; private lateinit var btnEditBookTitle: Button
     private lateinit var tvEditBookAuthor: TextView; private lateinit var btnEditBookAuthor: Button
@@ -44,9 +47,11 @@ class EditBookFragment : Fragment(), View.OnClickListener {
 
         initialiseUIElements(view)
 
-        setOptionalElementsVisibility(false)
+        setOptionalElementsVisibility(0)
 
         setUpTextViewTexts()
+
+        setUpGenreSpinner()
 
         setUpButtonClickListeners()
 
@@ -64,21 +69,33 @@ class EditBookFragment : Fragment(), View.OnClickListener {
         tvEditBookISBN = view.findViewById(R.id.tvEditBookISBN); btnEditBookISBN = view.findViewById(R.id.btnEditBookISBN)
         tvEditBookStarRating = view.findViewById(R.id.tvEditBookStarRating); btnEditBookStarRating = view.findViewById(R.id.btnEditBookStarRating)
         btnEditBookCancel = view.findViewById(R.id.btnEditBookCancel); btnEditBookSave = view.findViewById(R.id.btnEditBookSave)
+        spinEditBookGenre = view.findViewById(R.id.spinEditBookGenre); llEditBookSpinnerHolder = view.findViewById(R.id.llEditBookSpinnerHolder)
         btnEditBookReturn = view.findViewById(R.id.btnEditBookReturn)
     }
 
-    private fun setOptionalElementsVisibility(visibility: Boolean) {
-        if (visibility) {
-            etEditBookNewValue.visibility = View.VISIBLE
-            llEditBookButtonBar.visibility = View.VISIBLE
-            btnEditBookCancel.visibility = View.VISIBLE
-            btnEditBookSave.visibility = View.VISIBLE
-        }
-        else if (!visibility) {
-            etEditBookNewValue.visibility = View.GONE
-            llEditBookButtonBar.visibility = View.GONE
-            btnEditBookCancel.visibility = View.GONE
-            btnEditBookSave.visibility = View.GONE
+    private fun setOptionalElementsVisibility(visibility: Int) {
+        when (visibility) {
+            0 -> {
+                llEditBookSpinnerHolder.visibility = View.GONE
+                etEditBookNewValue.visibility = View.GONE
+                llEditBookButtonBar.visibility = View.GONE
+                btnEditBookCancel.visibility = View.GONE
+                btnEditBookSave.visibility = View.GONE
+            }
+            1 -> {
+                llEditBookSpinnerHolder.visibility = View.GONE
+                etEditBookNewValue.visibility = View.VISIBLE
+                llEditBookButtonBar.visibility = View.VISIBLE
+                btnEditBookCancel.visibility = View.VISIBLE
+                btnEditBookSave.visibility = View.VISIBLE
+            }
+            2 -> {
+                llEditBookSpinnerHolder.visibility = View.VISIBLE
+                etEditBookNewValue.visibility = View.GONE
+                llEditBookButtonBar.visibility = View.VISIBLE
+                btnEditBookCancel.visibility = View.VISIBLE
+                btnEditBookSave.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -98,6 +115,14 @@ class EditBookFragment : Fragment(), View.OnClickListener {
         btnEditBookReturn.setOnClickListener(this)
     }
 
+    private fun setUpGenreSpinner() {
+        genres = resources.getStringArray(R.array.book_genres)
+        val spinnerAdapter: ArrayAdapter<CharSequence> = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, genres)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinEditBookGenre.adapter = spinnerAdapter
+        spinEditBookGenre.onItemSelectedListener = this
+    }
+
     private fun setUpTextViewTexts() {
         tvEditBookTitle.text = dbHandler!!.getBookTitle(MainActivity.bookID!!)
         tvEditBookAuthor.text = dbHandler!!.getBookAuthor(MainActivity.bookID!!)
@@ -113,12 +138,12 @@ class EditBookFragment : Fragment(), View.OnClickListener {
         when(p0) {
             btnEditBookTitle -> {
                 btnEditBookTitle.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
-                    btnEditBookTitle.visibility = View.GONE
+                    setOptionalElementsVisibility(0)
+                    btnEditBookTitle.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
                 })
@@ -133,7 +158,7 @@ class EditBookFragment : Fragment(), View.OnClickListener {
                         book.bookTitle = newBookTitle
                         dbHandler!!.updateBookInformation(book)
                         clearEditField()
-                        setOptionalElementsVisibility(false)
+                        setOptionalElementsVisibility(0)
                         tvEditBookTitle.text = dbHandler!!.getBookTitle(MainActivity.bookID!!)
                         btnEditBookTitle.visibility = View.VISIBLE
 
@@ -143,12 +168,12 @@ class EditBookFragment : Fragment(), View.OnClickListener {
             }
             btnEditBookAuthor -> {
                 btnEditBookAuthor.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
-                    btnEditBookAuthor.visibility = View.GONE
+                    setOptionalElementsVisibility(0)
+                    btnEditBookAuthor.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
                 })
@@ -163,7 +188,7 @@ class EditBookFragment : Fragment(), View.OnClickListener {
                         book.bookAuthor = newBookAuthor
                         dbHandler!!.updateBookInformation(book)
                         clearEditField()
-                        setOptionalElementsVisibility(false)
+                        setOptionalElementsVisibility(0)
                         tvEditBookAuthor.text = dbHandler!!.getBookAuthor(MainActivity.bookID!!)
                         btnEditBookAuthor.visibility = View.VISIBLE
 
@@ -173,12 +198,12 @@ class EditBookFragment : Fragment(), View.OnClickListener {
             }
             btnEditBookTotalPages -> {
                 btnEditBookTotalPages.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
-                    btnEditBookTotalPages.visibility = View.GONE
+                    setOptionalElementsVisibility(0)
+                    btnEditBookTotalPages.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
                 })
@@ -193,7 +218,7 @@ class EditBookFragment : Fragment(), View.OnClickListener {
                         book.bookNumberOfPages = newBookTotalPages
                         dbHandler!!.updateBookInformation(book)
                         clearEditField()
-                        setOptionalElementsVisibility(false)
+                        setOptionalElementsVisibility(0)
                         tvEditBookTotalPages.text = dbHandler!!.getBookTotalPages(MainActivity.bookID!!).toString()
                         btnEditBookTotalPages.visibility = View.VISIBLE
 
@@ -203,27 +228,27 @@ class EditBookFragment : Fragment(), View.OnClickListener {
             }
             btnEditBookGenre -> {
                 btnEditBookGenre.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(2)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
-                    btnEditBookGenre.visibility = View.GONE
+                    setOptionalElementsVisibility(0)
+                    btnEditBookGenre.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
                 })
 
                 btnEditBookSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty())
+                    if (spinnerText.isEmpty())
                         Toast.makeText(requireContext(), "Book Genre field cannot be blank", Toast.LENGTH_SHORT).show()
                     else {
                         val book: BookModelClass = dbHandler!!.getBook(MainActivity.bookID!!)!!
-                        val newBookGenre: String = etEditBookNewValue.text.toString().trim()
+                        val newBookGenre: String = spinnerText
 
                         book.bookGenre = newBookGenre
                         dbHandler!!.updateBookInformation(book)
                         clearEditField()
-                        setOptionalElementsVisibility(false)
+                        setOptionalElementsVisibility(0)
                         tvEditBookGenre.text = dbHandler!!.getBookGenre(MainActivity.bookID!!)
                         btnEditBookGenre.visibility = View.VISIBLE
 
@@ -233,12 +258,12 @@ class EditBookFragment : Fragment(), View.OnClickListener {
             }
             btnEditBookPublisher -> {
                 btnEditBookPublisher.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
-                    btnEditBookPublisher.visibility = View.GONE
+                    setOptionalElementsVisibility(0)
+                    btnEditBookPublisher.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
                 })
@@ -253,7 +278,7 @@ class EditBookFragment : Fragment(), View.OnClickListener {
                         book.bookPublisher = newBookPublisher
                         dbHandler!!.updateBookInformation(book)
                         clearEditField()
-                        setOptionalElementsVisibility(false)
+                        setOptionalElementsVisibility(0)
                         tvEditBookPublisher.text = dbHandler!!.getBookPublisher(MainActivity.bookID!!)
                         btnEditBookPublisher.visibility = View.VISIBLE
 
@@ -263,12 +288,12 @@ class EditBookFragment : Fragment(), View.OnClickListener {
             }
             btnEditBookYearPublished -> {
                 btnEditBookYearPublished.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
-                    btnEditBookYearPublished.visibility = View.GONE
+                    setOptionalElementsVisibility(0)
+                    btnEditBookYearPublished.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
                 })
@@ -283,7 +308,7 @@ class EditBookFragment : Fragment(), View.OnClickListener {
                         book.bookYearPublished = newBookYearPublished
                         dbHandler!!.updateBookInformation(book)
                         clearEditField()
-                        setOptionalElementsVisibility(false)
+                        setOptionalElementsVisibility(0)
                         tvEditBookYearPublished.text = dbHandler!!.getBookYearPublished(MainActivity.bookID!!).toString()
                         btnEditBookYearPublished.visibility = View.VISIBLE
 
@@ -293,12 +318,12 @@ class EditBookFragment : Fragment(), View.OnClickListener {
             }
             btnEditBookISBN -> {
                 btnEditBookISBN.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
-                    btnEditBookISBN.visibility = View.GONE
+                    setOptionalElementsVisibility(0)
+                    btnEditBookISBN.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
                 })
@@ -313,7 +338,7 @@ class EditBookFragment : Fragment(), View.OnClickListener {
                         book.ISBN = newBookISBN
                         dbHandler!!.updateBookInformation(book)
                         clearEditField()
-                        setOptionalElementsVisibility(false)
+                        setOptionalElementsVisibility(0)
                         tvEditBookISBN.text = dbHandler!!.getBookISBN(MainActivity.bookID!!)
                         btnEditBookISBN.visibility = View.VISIBLE
 
@@ -323,12 +348,12 @@ class EditBookFragment : Fragment(), View.OnClickListener {
             }
             btnEditBookStarRating -> {
                 btnEditBookStarRating.visibility = View.GONE
-                setOptionalElementsVisibility(true)
+                setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
                     clearEditField()
-                    setOptionalElementsVisibility(false)
-                    btnEditBookStarRating.visibility = View.GONE
+                    setOptionalElementsVisibility(0)
+                    btnEditBookStarRating.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
                 })
@@ -343,7 +368,7 @@ class EditBookFragment : Fragment(), View.OnClickListener {
                         book.bookStarRating = newBookStarRating
                         dbHandler!!.updateBookInformation(book)
                         clearEditField()
-                        setOptionalElementsVisibility(false)
+                        setOptionalElementsVisibility(0)
                         tvEditBookStarRating.text = dbHandler!!.getBookStarRating(MainActivity.bookID!!).toString()
                         btnEditBookStarRating.visibility = View.VISIBLE
 
@@ -367,5 +392,13 @@ class EditBookFragment : Fragment(), View.OnClickListener {
             return true
         }
         return false
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        spinnerText = genres[p2].toString()
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        spinnerText = ""
     }
 }
