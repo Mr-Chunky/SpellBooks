@@ -9,4 +9,3 @@ Upcoming features:
 * Progress Bar to keep track of the books users have currently read vs their book goal
 * Progress Bar to keep track of the pages users have currently read vs their page goal
 * Camera functionality to add a custom book image with included permission handling for the first time that the user taps on the camera icon
-* Spinners to choose from a list of pre-defined book genres when creating or editing a book
