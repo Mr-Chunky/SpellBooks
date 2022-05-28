@@ -40,22 +40,35 @@ class AccountDetailsFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigationController = Navigation.findNavController(view)
-         dbHandler = DBHandler(requireContext())
+        dbHandler = DBHandler(requireContext())
+        val completedBooks: ArrayList<BookModelClass> = dbHandler!!.getUserCompletedBooks(MainActivity.userID!!)
+        val remainingBooks: Int
+        val remainingPages: Int
+        var recentBook: Int? = dbHandler!!.getUserRecentBook(MainActivity.userID!!)
+
+        if (completedBooks.isEmpty()) {
+            remainingBooks = 0
+            remainingPages = 0
+        }
+        else {
+            remainingBooks = dbHandler!!.calculateRemainingGoalBooks(MainActivity.userID!!, completedBooks)
+            remainingPages = dbHandler!!.calculateRemainingGoalPages(MainActivity.userID!!, completedBooks)
+        }
 
         initialiseUIElements(view)
         setUpButtonClickListener()
 
-        tvBooksProgressIndicator.text = 0.toString()
-        tvMostReadGenreIndicator.text = dbHandler!!.getUserFavGenre(MainActivity.userID!!)
-        tvRecentBookIndicator.text = dbHandler!!.getUserFavBook(MainActivity.userID!!)
+        tvBooksProgressIndicator.text = 0.toString() // TODO: GET COUNT OF ALL BOOKS IN completedBooks ARRAYLIST
+        tvMostReadGenreIndicator.text = dbHandler!!.getUserFavGenre(MainActivity.userID!!) // TODO: GET COUNT OF BOOKS WITH SPECIFIC GENRE in completedBooks ARRAYLIST
 
-        val booksGoal: Int = dbHandler!!.getUserBookGoal(MainActivity.userID!!)
-        val booksFinished: Int = tvBooksProgressIndicator.text.toString().toInt()
-        tvBooksGoalIndicator.text = (booksGoal - booksFinished).toString()
+        if (recentBook != null)
+            tvRecentBookIndicator.text = dbHandler!!.getBookTitle(recentBook)
+        else
+            tvRecentBookIndicator.text = R.string.no_books_read.toString()
 
-        val pagesGoal: Int = dbHandler!!.getUserPageGoal(MainActivity.userID!!)
-        val pagesFinished: Int = tvPagesProgressIndicator.text.toString().toInt()
-        tvPagesGoalIndicator.text = (pagesGoal - pagesFinished).toString()
+        tvBooksGoalIndicator.text = remainingBooks.toString()
+
+        tvPagesGoalIndicator.text = remainingPages.toString()
 
         val bottomNav: BottomNavigationView? = view.findViewById(R.id.bnvStatsNavigation)
         bottomNav!!.setupWithNavController(navigationController!!)

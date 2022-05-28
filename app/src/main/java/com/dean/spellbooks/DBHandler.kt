@@ -746,7 +746,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         return bookReadStatus
     }
 
-    private fun getUserCompletedBooks(userID: Int): ArrayList<BookModelClass> {
+    fun getUserCompletedBooks(userID: Int): ArrayList<BookModelClass> {
         val completedBooks: ArrayList<BookModelClass> = ArrayList()
 
         val select = "SELECT * FROM $TABLE_BOOKS WHERE $KEY_BOOK_READ_STATUS = ? AND $KEY_BOOK_OWNER = ?"
@@ -795,6 +795,63 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         cursor.close()
         database.close()
         return completedBooks
+    }
+
+    // Receives completedBooks ArrayList from the getUserCompletedBooks() function
+    fun calculateMostReadGenre(completedBooks: ArrayList<BookModelClass>): String {
+        var fantasyCount: Int = 0
+        var horrorCount: Int = 0
+        var childrenCount: Int = 0
+        var nonfictionCount: Int = 0
+        var scienceFictionCount: Int = 0
+        var romanceCount: Int = 0
+        var selfHelpCount: Int = 0
+        var religiousCount: Int = 0
+
+        for (book in completedBooks) {
+            when (book.bookGenre) {
+                "Fantasy" -> fantasyCount++
+                "Horror" -> horrorCount++
+                "Children" -> childrenCount++
+                "Non-fiction" -> nonfictionCount++
+                "Science Fiction" -> scienceFictionCount++
+                "Romance" -> romanceCount++
+                "Self-Help" -> selfHelpCount++
+                "Religious" -> religiousCount++
+            }
+        }
+        if (fantasyCount > horrorCount && fantasyCount > childrenCount && fantasyCount > nonfictionCount &&
+                fantasyCount > scienceFictionCount && fantasyCount > romanceCount && fantasyCount > selfHelpCount &&
+                fantasyCount > religiousCount)
+            return "Fantasy"
+        else if (horrorCount > fantasyCount && horrorCount > childrenCount && horrorCount > nonfictionCount &&
+                horrorCount > scienceFictionCount && horrorCount > romanceCount && horrorCount > selfHelpCount &&
+                horrorCount > religiousCount)
+            return "Horror"
+        else if (childrenCount > fantasyCount && childrenCount > horrorCount && childrenCount > nonfictionCount &&
+                childrenCount > scienceFictionCount && childrenCount > romanceCount && childrenCount > selfHelpCount &&
+                childrenCount > religiousCount)
+            return "Children"
+        else if (nonfictionCount > fantasyCount && nonfictionCount > horrorCount && nonfictionCount > childrenCount &&
+                nonfictionCount > scienceFictionCount && nonfictionCount > romanceCount && nonfictionCount > selfHelpCount &&
+                nonfictionCount > religiousCount)
+            return "Non-fiction"
+        else if (scienceFictionCount > fantasyCount && scienceFictionCount > horrorCount && scienceFictionCount > childrenCount &&
+                scienceFictionCount > nonfictionCount && scienceFictionCount > romanceCount && scienceFictionCount > selfHelpCount &&
+                scienceFictionCount > religiousCount)
+            return "Science Fiction"
+        else if (romanceCount > fantasyCount && romanceCount > horrorCount && romanceCount > childrenCount && romanceCount > nonfictionCount &&
+                romanceCount > scienceFictionCount && romanceCount > selfHelpCount && romanceCount > religiousCount)
+            return "Romance"
+        else if (selfHelpCount > fantasyCount && selfHelpCount > horrorCount && selfHelpCount > childrenCount && selfHelpCount > nonfictionCount &&
+                selfHelpCount > scienceFictionCount && selfHelpCount > romanceCount && selfHelpCount > religiousCount)
+            return "Self-Help"
+        else if (religiousCount > fantasyCount && religiousCount > horrorCount && religiousCount > childrenCount && religiousCount > nonfictionCount &&
+                religiousCount > scienceFictionCount && religiousCount > romanceCount && religiousCount > selfHelpCount)
+            return "Religious"
+
+        // TODO: IMPLEMENT A SPINNER FOR PRE-DEFINED GENRE VALUES AND GET THEM HERE
+        return "No genre is read more than another"
     }
 
     // Receives completedBooks ArrayList from the getUserCompletedBooks() function
