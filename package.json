@@ -1,0 +1,20 @@
+{
+  "name": "spellbooks",
+  "version": "1.0.0",
+  "description": "One of my mobile application projects that stems from an assignment during my final year of University.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://%5BMr-Chunky%5D@github.com/Mr-Chunky/SpellBooks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mr-Chunky/SpellBooks/issues"
+  },
+  "homepage": "https://github.com/Mr-Chunky/SpellBooks#readme"
+}
