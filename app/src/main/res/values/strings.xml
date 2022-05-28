@@ -45,6 +45,7 @@
     <string name="favourite_book_indicator">Favourite Book:</string>
     <string name="book_reading_goal_per_year_indicator">Book Reading Goal/yr:</string>
     <string name="page_reading_goal_per_year_indicator">Page Reading Goal/yr:</string>
+    <string name="no_books_read">No books read recently</string>
     <string name="edit">Edit</string>
     <string name="enter_a_new_value">Enter a new value</string>
     <string name="save">Save</string>
