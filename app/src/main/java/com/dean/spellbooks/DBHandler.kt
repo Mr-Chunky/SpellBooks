@@ -11,7 +11,8 @@ import android.widget.Toast
 
 class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    // TODO: ADD A NEW FIELD TO USERS (RECENT BOOK) AND BOOKS (IS READ)
+    // TODO: ADD A NEW FIELD TO BOOKS (BOOK IMAGE)
+    // TODO: DOCUMENT THIS CLASS
 
     companion object {
         private const val DATABASE_VERSION = 6

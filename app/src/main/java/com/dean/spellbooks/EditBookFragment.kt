@@ -17,17 +17,17 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
     private lateinit var genres: Array<out String>
     private lateinit var spinnerText: String
     // These UI elements will be programmed in pairs
-    private lateinit var spinEditBookGenre: Spinner; private lateinit var llEditBookSpinnerHolder: LinearLayout
-    private lateinit var etEditBookNewValue: EditText; private lateinit var llEditBookButtonBar: LinearLayout
-    private lateinit var tvEditBookTitle: TextView; private lateinit var btnEditBookTitle: Button
-    private lateinit var tvEditBookAuthor: TextView; private lateinit var btnEditBookAuthor: Button
-    private lateinit var tvEditBookTotalPages: TextView; private lateinit var btnEditBookTotalPages: Button
-    private lateinit var tvEditBookGenre: TextView; private lateinit var btnEditBookGenre: Button
-    private lateinit var tvEditBookPublisher: TextView; private lateinit var btnEditBookPublisher: Button
+    private lateinit var spinEditBookGenre: Spinner;        private lateinit var llEditBookSpinnerHolder: LinearLayout
+    private lateinit var etEditBookNewValue: EditText;      private lateinit var llEditBookButtonBar: LinearLayout
+    private lateinit var tvEditBookTitle: TextView;         private lateinit var btnEditBookTitle: Button
+    private lateinit var tvEditBookAuthor: TextView;        private lateinit var btnEditBookAuthor: Button
+    private lateinit var tvEditBookTotalPages: TextView;    private lateinit var btnEditBookTotalPages: Button
+    private lateinit var tvEditBookGenre: TextView;         private lateinit var btnEditBookGenre: Button
+    private lateinit var tvEditBookPublisher: TextView;     private lateinit var btnEditBookPublisher: Button
     private lateinit var tvEditBookYearPublished: TextView; private lateinit var btnEditBookYearPublished: Button
-    private lateinit var tvEditBookISBN: TextView; private lateinit var btnEditBookISBN: Button
-    private lateinit var tvEditBookStarRating: TextView; private lateinit var btnEditBookStarRating: Button
-    private lateinit var btnEditBookCancel: Button; private lateinit var btnEditBookSave: Button
+    private lateinit var tvEditBookISBN: TextView;          private lateinit var btnEditBookISBN: Button
+    private lateinit var tvEditBookStarRating: TextView;    private lateinit var btnEditBookStarRating: Button
+    private lateinit var btnEditBookCancel: Button;         private lateinit var btnEditBookSave: Button
     private lateinit var btnEditBookReturn: Button
 
     override fun onCreateView(
@@ -59,17 +59,17 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
     }
 
     private fun initialiseUIElements(view: View) {
-        etEditBookNewValue = view.findViewById(R.id.etEditBookNewValue); llEditBookButtonBar = view.findViewById(R.id.llEditBookButtonBar)
-        tvEditBookTitle = view.findViewById(R.id.tvEditBookTitle); btnEditBookTitle = view.findViewById(R.id.btnEditBookTitle)
-        tvEditBookAuthor = view.findViewById(R.id.tvEditBookAuthor); btnEditBookAuthor = view.findViewById(R.id.btnEditBookAuthor)
-        tvEditBookTotalPages = view.findViewById(R.id.tvEditBookTotalPages); btnEditBookTotalPages = view.findViewById(R.id.btnEditBookTotalPages)
-        tvEditBookGenre = view.findViewById(R.id.tvEditBookGenre); btnEditBookGenre = view.findViewById(R.id.btnEditBookGenre)
-        tvEditBookPublisher = view.findViewById(R.id.tvEditBookPublisher); btnEditBookPublisher = view.findViewById(R.id.btnEditBookPublisher)
-        tvEditBookYearPublished = view.findViewById(R.id.tvEditBookYearPublished); btnEditBookYearPublished = view.findViewById(R.id.btnEditBookYearPublished)
-        tvEditBookISBN = view.findViewById(R.id.tvEditBookISBN); btnEditBookISBN = view.findViewById(R.id.btnEditBookISBN)
-        tvEditBookStarRating = view.findViewById(R.id.tvEditBookStarRating); btnEditBookStarRating = view.findViewById(R.id.btnEditBookStarRating)
-        btnEditBookCancel = view.findViewById(R.id.btnEditBookCancel); btnEditBookSave = view.findViewById(R.id.btnEditBookSave)
-        spinEditBookGenre = view.findViewById(R.id.spinEditBookGenre); llEditBookSpinnerHolder = view.findViewById(R.id.llEditBookSpinnerHolder)
+        etEditBookNewValue = view.findViewById(R.id.etEditBookNewValue);            llEditBookButtonBar = view.findViewById(R.id.llEditBookButtonBar)
+        tvEditBookTitle = view.findViewById(R.id.tvEditBookTitle);                  btnEditBookTitle = view.findViewById(R.id.btnEditBookTitle)
+        tvEditBookAuthor = view.findViewById(R.id.tvEditBookAuthor);                btnEditBookAuthor = view.findViewById(R.id.btnEditBookAuthor)
+        tvEditBookTotalPages = view.findViewById(R.id.tvEditBookTotalPages);        btnEditBookTotalPages = view.findViewById(R.id.btnEditBookTotalPages)
+        tvEditBookGenre = view.findViewById(R.id.tvEditBookGenre);                  btnEditBookGenre = view.findViewById(R.id.btnEditBookGenre)
+        tvEditBookPublisher = view.findViewById(R.id.tvEditBookPublisher);          btnEditBookPublisher = view.findViewById(R.id.btnEditBookPublisher)
+        tvEditBookYearPublished = view.findViewById(R.id.tvEditBookYearPublished);  btnEditBookYearPublished = view.findViewById(R.id.btnEditBookYearPublished)
+        tvEditBookISBN = view.findViewById(R.id.tvEditBookISBN);                    btnEditBookISBN = view.findViewById(R.id.btnEditBookISBN)
+        tvEditBookStarRating = view.findViewById(R.id.tvEditBookStarRating);        btnEditBookStarRating = view.findViewById(R.id.btnEditBookStarRating)
+        btnEditBookCancel = view.findViewById(R.id.btnEditBookCancel);              btnEditBookSave = view.findViewById(R.id.btnEditBookSave)
+        spinEditBookGenre = view.findViewById(R.id.spinEditBookGenre);              llEditBookSpinnerHolder = view.findViewById(R.id.llEditBookSpinnerHolder)
         btnEditBookReturn = view.findViewById(R.id.btnEditBookReturn)
     }
 
