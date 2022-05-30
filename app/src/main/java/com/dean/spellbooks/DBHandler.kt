@@ -12,10 +12,12 @@ import android.widget.Toast
 class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     // TODO: ADD A NEW FIELD TO BOOKS (BOOK IMAGE)
+    // TODO: CREATE A UTILITY CLASS TO AVOID GOD CLASS
+    // TODO: IMPLEMENT SINGLETON PATTERN
     // TODO: DOCUMENT THIS CLASS
 
     companion object {
-        private const val DATABASE_VERSION = 6
+        private const val DATABASE_VERSION = 7
         private const val DATABASE_NAME = "SpellBooksDatabase"
         private const val TABLE_USERS = "WizardsTable"
         private const val TABLE_BOOKS = "BooksTable"
@@ -28,7 +30,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         private const val KEY_FAVOURITE_BOOK = "favourite_book"
         private const val KEY_BOOKS_GOAL = "books_goal"
         private const val KEY_PAGES_GOAL = "pages_goal"
-        private const val KEY_RECENT_BOOK = "recent_book" // Foreign Key
+        private const val KEY_RECENT_BOOK = "recent_book" // Foreign Key (initially deferred)
 
         // Fields for the books
         private const val KEY_BOOK_ID = "_book_id"
@@ -41,6 +43,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         private const val KEY_BOOK_ISBN = "isbn"
         private const val KEY_BOOK_RATING = "book_star_rating"
         private const val KEY_BOOK_READ_STATUS = "book_read_status" // 0 = False (not read yet) | 1 = True (has been read)
+        private const val KEY_BOOK_IMAGE = "book_image"
         private const val KEY_BOOK_OWNER = "book_owner" // Foreign Key
     }
 
@@ -48,12 +51,12 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         val CREATE_WIZARDS_TABLE = ("CREATE TABLE $TABLE_USERS($KEY_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "$KEY_NAME TEXT NOT NULL,$KEY_PASSWORD TEXT NOT NULL,$KEY_FAVOURITE_GENRE TEXT NOT NULL,$KEY_FAVOURITE_BOOK TEXT NOT NULL," +
                 "$KEY_BOOKS_GOAL INTEGER NOT NULL,$KEY_PAGES_GOAL INTEGER NOT NULL,$KEY_RECENT_BOOK INTEGER," +
-                "FOREIGN KEY($KEY_RECENT_BOOK) REFERENCES $TABLE_BOOKS($KEY_BOOK_ID))")
+                "FOREIGN KEY($KEY_RECENT_BOOK) REFERENCES $TABLE_BOOKS($KEY_BOOK_ID) DEFERRABLE INITIALLY DEFERRED)")
 
         val CREATE_BOOKS_TABLE = ("CREATE TABLE $TABLE_BOOKS($KEY_BOOK_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "$KEY_BOOK_TITLE TEXT NOT NULL,$KEY_BOOK_AUTHOR TEXT NOT NULL,$KEY_BOOK_PAGES INTEGER NOT NULL," +
                 "$KEY_BOOK_GENRE TEXT NOT NULL,$KEY_BOOK_PUBLISHER TEXT NOT NULL,$KEY_BOOK_YEAR_PUBLISHED INTEGER NOT NULL," +
-                "$KEY_BOOK_ISBN TEXT NOT NULL,$KEY_BOOK_RATING REAL,$KEY_BOOK_READ_STATUS INTEGER NOT NULL,$KEY_BOOK_OWNER INTEGER NOT NULL," +
+                "$KEY_BOOK_ISBN TEXT NOT NULL,$KEY_BOOK_RATING REAL,$KEY_BOOK_READ_STATUS INTEGER NOT NULL,$KEY_BOOK_IMAGE BLOB,$KEY_BOOK_OWNER INTEGER NOT NULL," +
                 "FOREIGN KEY($KEY_BOOK_OWNER) REFERENCES $TABLE_USERS($KEY_ID))")
         p0?.execSQL(CREATE_WIZARDS_TABLE)
         p0?.execSQL(CREATE_BOOKS_TABLE)
@@ -83,6 +86,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         values.put(KEY_BOOK_ISBN, book.ISBN)
         values.put(KEY_BOOK_RATING, book.bookStarRating)
         values.put(KEY_BOOK_READ_STATUS, book.readStatus)
+        values.put(KEY_BOOK_IMAGE, book.bookImage)
         values.put(KEY_BOOK_OWNER, book.bookOwner)
 
         val response = database.insert(TABLE_BOOKS, null, values)
@@ -132,6 +136,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         var ISBN: String
         var bookStarRating: Float
         var bookReadStatus: Int
+        var bookImage: ByteArray?
         var bookOwner: Int
 
         if (cursor!!.moveToFirst()) {
@@ -146,10 +151,11 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
                 ISBN = cursor.getString(cursor.getColumnIndexOrThrow(KEY_BOOK_ISBN))
                 bookStarRating = cursor.getFloat(cursor.getColumnIndexOrThrow(KEY_BOOK_RATING))
                 bookReadStatus = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BOOK_READ_STATUS))
+                bookImage = cursor.getBlob(cursor.getColumnIndexOrThrow(KEY_BOOK_IMAGE))
                 bookOwner = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BOOK_OWNER))
 
                 val book = BookModelClass(_id, bookTitle, bookAuthor, bookNumberOfPages, bookGenre,
-                    bookPublisher, bookYearPublished, ISBN, bookStarRating, bookReadStatus, bookOwner)
+                    bookPublisher, bookYearPublished, ISBN, bookStarRating, bookReadStatus, bookImage, bookOwner)
                 bookList.add(book)
             } while (cursor.moveToNext())
         }
@@ -185,6 +191,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         var bookISBN: String
         var bookStarRating: Float
         var bookReadStatus: Int
+        var bookImage: ByteArray?
         var bookOwner: Int
 
         if (cursor.moveToFirst()) {
@@ -199,10 +206,11 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
                 bookISBN = cursor.getString(cursor.getColumnIndexOrThrow(KEY_BOOK_ISBN))
                 bookStarRating = cursor.getFloat(cursor.getColumnIndexOrThrow(KEY_BOOK_RATING))
                 bookReadStatus = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BOOK_READ_STATUS))
+                bookImage = cursor.getBlob(cursor.getColumnIndexOrThrow(KEY_BOOK_IMAGE))
                 bookOwner = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BOOK_OWNER))
 
                 book = BookModelClass(_bookID, bookTitle, bookAuthor, bookNumberOfPages, bookGenre,
-                    bookPublisher, bookYearPublished, bookISBN, bookStarRating, bookReadStatus, bookOwner)
+                    bookPublisher, bookYearPublished, bookISBN, bookStarRating, bookReadStatus, bookImage, bookOwner)
             } while (cursor.moveToNext())
         }
         cursor.close()
@@ -268,6 +276,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         values.put(KEY_BOOK_ISBN, book.ISBN)
         values.put(KEY_BOOK_RATING, book.bookStarRating)
         values.put(KEY_BOOK_READ_STATUS, book.readStatus)
+        values.put(KEY_BOOK_IMAGE, book.bookImage)
         values.put(KEY_BOOK_OWNER, book.bookOwner)
 
         val response = database.update(TABLE_BOOKS, values, "$KEY_BOOK_ID = ${book.bookID}",
@@ -747,6 +756,30 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         return bookReadStatus
     }
 
+    fun getBookImage(bookID: Int): ByteArray? {
+        var bookImage: ByteArray? = null
+
+        val select = "SELECT $KEY_BOOK_IMAGE FROM $TABLE_BOOKS WHERE $KEY_BOOK_ID = ?"
+
+        val database = this.readableDatabase
+        var cursor: Cursor? = null
+
+        try {
+            cursor = database.rawQuery(select, arrayOf(bookID.toString()))
+        } catch (exception: SQLiteException) {
+            Log.e("sqlite", "Unable to get book image given the book ID")
+        }
+
+        if (cursor!!.moveToFirst()) {
+            do {
+                bookImage = cursor.getBlob(cursor.getColumnIndexOrThrow(KEY_BOOK_IMAGE))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        database.close()
+        return bookImage
+    }
+
     fun getUserCompletedBooks(userID: Int): ArrayList<BookModelClass> {
         val completedBooks: ArrayList<BookModelClass> = ArrayList()
 
@@ -772,6 +805,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         var bookISBN: String
         var bookStarRating: Float
         var bookReadStatus: Int
+        var bookImage: ByteArray?
         var bookOwner: Int
 
         if (cursor!!.moveToFirst()) {
@@ -786,10 +820,11 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
                 bookISBN = cursor.getString(cursor.getColumnIndexOrThrow(KEY_BOOK_ISBN))
                 bookStarRating = cursor.getFloat(cursor.getColumnIndexOrThrow(KEY_BOOK_RATING))
                 bookReadStatus = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BOOK_READ_STATUS))
+                bookImage = cursor.getBlob(cursor.getColumnIndexOrThrow(KEY_BOOK_IMAGE))
                 bookOwner = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BOOK_OWNER))
 
                 val book = BookModelClass(_bookID, bookTitle, bookAuthor, bookNumberOfPages, bookGenre,
-                    bookPublisher, bookYearPublished, bookISBN, bookStarRating, bookReadStatus, bookOwner)
+                    bookPublisher, bookYearPublished, bookISBN, bookStarRating, bookReadStatus, bookImage, bookOwner)
                 completedBooks.add(book)
             } while (cursor.moveToNext())
         }

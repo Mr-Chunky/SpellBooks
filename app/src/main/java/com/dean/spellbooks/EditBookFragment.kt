@@ -10,6 +10,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 
+// TODO: HANDLE NEW BOOK IMAGE
+
 class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
     var navigationController: NavController? = null
     var dbHandler: DBHandler? = null

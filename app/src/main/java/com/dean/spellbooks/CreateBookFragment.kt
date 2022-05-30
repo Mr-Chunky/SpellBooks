@@ -90,10 +90,11 @@ class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemS
             val bookYearPublished: Int = etCreateBookYearPublished.text.toString().trim().toInt()
             val ISBN: String = etCreateBookISBN.text.toString().trim()
             val bookStarRating: Float = etCreateBookStarRating.text.toString().trim().toFloat()
+            val bookImage: ByteArray    // TODO: IMPLEMENT THIS
             val dbHandler: DBHandler = DBHandler(requireContext())
 
             val status = dbHandler.addBook(BookModelClass(null, bookTitle, bookAuthor, bookPages,
-                bookGenre, bookPublisher, bookYearPublished, ISBN, bookStarRating, 0, MainActivity.userID!!))
+                bookGenre, bookPublisher, bookYearPublished, ISBN, bookStarRating, 0, null, MainActivity.userID!!))
 
             if (status > -1) {
                 Toast.makeText(requireContext(), "Successfully added book to list", Toast.LENGTH_SHORT).show()
