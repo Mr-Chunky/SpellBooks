@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+
             android:layout_marginEnd="10dp"
             android:ems="10"
             android:hint="@string/enter_a_new_value"
@@ -35,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:orientation="horizontal">
 
@@ -61,7 +62,8 @@
             android:id="@+id/llEditBookButtonBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+
             android:layout_marginEnd="10dp"
             android:gravity="center"
             android:orientation="horizontal"
@@ -87,9 +89,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:backgroundTint="@color/deep_red"
-            android:text="@string/back" />
+            android:text="@string/back"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 
@@ -119,6 +122,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/ibEditBookImage"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/deep_red"
+                android:contentDescription="@string/add_a_picture_to_the_book"
+                android:src="@android:drawable/ic_menu_camera" />
 
             <LinearLayout
                 android:layout_width="match_parent"

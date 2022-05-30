@@ -58,6 +58,8 @@
     <string name="book_goal_progress">Book Goal Progress</string>
     <string name="page_goal_progress">Page Goal Progress</string>
     <string name="an_image_of_the_book_being_shown">An image of the book being shown</string>
+    <string name="add_a_picture_to_the_book">Add a picture to the book</string>
+
     <string-array name="book_genres">
         <item name="Fantasy">Fantasy</item>
         <item name="Horror">Horror</item>

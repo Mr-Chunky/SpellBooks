@@ -22,14 +22,14 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
     private lateinit var genres: Array<out String>
     private lateinit var spinnerText: String
     // All of the below UI elements will be programmed in pairs
-    private lateinit var spinEditAccountGenre: Spinner; private lateinit var llEditAccountSpinnerHolder: LinearLayout
-    private lateinit var etEditAccountValue: EditText; private lateinit var llEditAccountButtonBar: LinearLayout
-    private lateinit var btnEditAccountUsername: Button; private lateinit var tvEditAccountUsername: TextView
-    private lateinit var btnEditAccountPassword: Button; private lateinit var tvEditAccountPassword: TextView
-    private lateinit var btnEditAccountFavGenre: Button; private lateinit var tvEditAccountFavGenre: TextView
-    private lateinit var btnEditAccountFavBook: Button; private lateinit var tvEditAccountFavBook: TextView
-    private lateinit var btnEditAccountBookGoal: Button; private lateinit var tvEditAccountBookGoal: TextView
-    private lateinit var btnEditAccountPageGoal: Button; private lateinit var tvEditAccountPageGoal: TextView
+    private lateinit var spinEditAccountGenre: Spinner;     private lateinit var llEditAccountSpinnerHolder: LinearLayout
+    private lateinit var etEditAccountValue: EditText;      private lateinit var llEditAccountButtonBar: LinearLayout
+    private lateinit var btnEditAccountUsername: Button;    private lateinit var tvEditAccountUsername: TextView
+    private lateinit var btnEditAccountPassword: Button;    private lateinit var tvEditAccountPassword: TextView
+    private lateinit var btnEditAccountFavGenre: Button;    private lateinit var tvEditAccountFavGenre: TextView
+    private lateinit var btnEditAccountFavBook: Button;     private lateinit var tvEditAccountFavBook: TextView
+    private lateinit var btnEditAccountBookGoal: Button;    private lateinit var tvEditAccountBookGoal: TextView
+    private lateinit var btnEditAccountPageGoal: Button;    private lateinit var tvEditAccountPageGoal: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,14 +73,15 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
     private fun initialiseUIElements(view: View) {
         btnEditAccountCancel = view.findViewById(R.id.btnEditAccountCancel)
         btnEditAccountSave = view.findViewById(R.id.btnEditAccountSave)
-        spinEditAccountGenre = view.findViewById(R.id.spinEditAccountGenre); llEditAccountSpinnerHolder = view.findViewById(R.id.llEditAccountSpinnerHolder)
-        etEditAccountValue = view.findViewById(R.id.etEditAccountValue); llEditAccountButtonBar = view.findViewById(R.id.llEditAccountButtonBar)
-        btnEditAccountUsername = view.findViewById(R.id.btnEditAccountUsername); tvEditAccountUsername = view.findViewById(R.id.tvEditAccountUsername)
-        btnEditAccountPassword = view.findViewById(R.id.btnEditAccountPassword); tvEditAccountPassword = view.findViewById(R.id.tvEditAccountPassword)
-        btnEditAccountFavGenre = view.findViewById(R.id.btnEditAccountFavGenre); tvEditAccountFavGenre = view.findViewById(R.id.tvEditAccountFavGenre)
-        btnEditAccountFavBook = view.findViewById(R.id.btnEditAccountFavBook); tvEditAccountFavBook = view.findViewById(R.id.tvEditAccountFavBook)
-        btnEditAccountBookGoal = view.findViewById(R.id.btnEditAccountBookGoal); tvEditAccountBookGoal = view.findViewById(R.id.tvEditAccountBookGoal)
-        btnEditAccountPageGoal = view.findViewById(R.id.btnEditAccountPageGoal); tvEditAccountPageGoal = view.findViewById(R.id.tvEditAccountPageGoal)
+        spinEditAccountGenre = view.findViewById(R.id.spinEditAccountGenre);        llEditAccountSpinnerHolder = view.findViewById(R.id.llEditAccountSpinnerHolder)
+        etEditAccountValue = view.findViewById(R.id.etEditAccountValue);            llEditAccountButtonBar = view.findViewById(R.id.llEditAccountButtonBar)
+        btnEditAccountUsername = view.findViewById(R.id.btnEditAccountUsername);    tvEditAccountUsername = view.findViewById(R.id.tvEditAccountUsername)
+        btnEditAccountPassword = view.findViewById(R.id.btnEditAccountPassword);    tvEditAccountPassword = view.findViewById(R.id.tvEditAccountPassword)
+        btnEditAccountFavGenre = view.findViewById(R.id.btnEditAccountFavGenre);    tvEditAccountFavGenre = view.findViewById(R.id.tvEditAccountFavGenre)
+        btnEditAccountFavBook = view.findViewById(R.id.btnEditAccountFavBook);      tvEditAccountFavBook = view.findViewById(R.id.tvEditAccountFavBook)
+        btnEditAccountBookGoal = view.findViewById(R.id.btnEditAccountBookGoal);    tvEditAccountBookGoal = view.findViewById(R.id.tvEditAccountBookGoal)
+        btnEditAccountPageGoal = view.findViewById(R.id.btnEditAccountPageGoal);    tvEditAccountPageGoal = view.findViewById(R.id.tvEditAccountPageGoal)
+
     }
 
     private fun setUpTextViewTexts() {

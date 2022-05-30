@@ -31,19 +31,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="3dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCreateBookTitle">
 
+        <ImageButton
+            android:id="@+id/ibCreateBookImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/deep_red"
+            android:contentDescription="@string/add_a_picture_to_the_book"
+            android:src="@android:drawable/ic_menu_camera" />
+
         <EditText
             android:id="@+id/etCreateBookTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="5dp"
             android:ems="10"
@@ -59,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="5dp"
             android:ems="10"
@@ -75,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="5dp"
             android:ems="10"
@@ -90,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="5dp"
             android:orientation="horizontal">
@@ -100,11 +109,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="10dp"
                 android:layout_marginStart="4dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/genre"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:text="@string/genre" />
+                android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/spinCreateBookGenre"
@@ -124,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="5dp"
             android:ems="10"
@@ -140,7 +149,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="5dp"
             android:ems="10"
@@ -156,7 +165,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="5dp"
             android:ems="10"
@@ -171,7 +180,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="5dp"
             android:ems="10"
@@ -185,7 +194,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:gravity="center"
             android:orientation="horizontal">
 
