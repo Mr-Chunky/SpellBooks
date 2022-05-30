@@ -26,6 +26,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
     private lateinit var tvEditBookTotalPages: TextView;    private lateinit var btnEditBookTotalPages: Button
     private lateinit var tvEditBookGenre: TextView;         private lateinit var btnEditBookGenre: Button
     private lateinit var tvEditBookPublisher: TextView;     private lateinit var btnEditBookPublisher: Button
+
     private lateinit var tvEditBookYearPublished: TextView; private lateinit var btnEditBookYearPublished: Button
     private lateinit var tvEditBookISBN: TextView;          private lateinit var btnEditBookISBN: Button
     private lateinit var tvEditBookStarRating: TextView;    private lateinit var btnEditBookStarRating: Button
@@ -84,6 +85,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 btnEditBookCancel.visibility = View.GONE
                 btnEditBookSave.visibility = View.GONE
                 btnEditBookReturn.visibility = View.VISIBLE
+
             }
             1 -> {
                 llEditBookSpinnerHolder.visibility = View.GONE
@@ -92,6 +94,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 btnEditBookCancel.visibility = View.VISIBLE
                 btnEditBookSave.visibility = View.VISIBLE
                 btnEditBookReturn.visibility = View.GONE
+
             }
             2 -> {
                 llEditBookSpinnerHolder.visibility = View.VISIBLE
@@ -100,6 +103,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 btnEditBookCancel.visibility = View.VISIBLE
                 btnEditBookSave.visibility = View.VISIBLE
                 btnEditBookReturn.visibility = View.GONE
+
             }
         }
     }

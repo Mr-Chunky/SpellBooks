@@ -96,6 +96,7 @@ class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemS
             val status = dbHandler.addBook(BookModelClass(null, bookTitle, bookAuthor, bookPages,
                 bookGenre, bookPublisher, bookYearPublished, ISBN, bookStarRating, 0, null, MainActivity.userID!!))
 
+
             if (status > -1) {
                 Toast.makeText(requireContext(), "Successfully added book to list", Toast.LENGTH_SHORT).show()
                 etCreateBookTitle.text.clear()

@@ -11,6 +11,7 @@ import android.widget.Toast
 
 class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
+
     // TODO: ADD A NEW FIELD TO BOOKS (BOOK IMAGE)
     // TODO: CREATE A UTILITY CLASS TO AVOID GOD CLASS
     // TODO: IMPLEMENT SINGLETON PATTERN
@@ -31,6 +32,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         private const val KEY_BOOKS_GOAL = "books_goal"
         private const val KEY_PAGES_GOAL = "pages_goal"
         private const val KEY_RECENT_BOOK = "recent_book" // Foreign Key (initially deferred)
+
 
         // Fields for the books
         private const val KEY_BOOK_ID = "_book_id"
@@ -53,11 +55,13 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
                 "$KEY_BOOKS_GOAL INTEGER NOT NULL,$KEY_PAGES_GOAL INTEGER NOT NULL,$KEY_RECENT_BOOK INTEGER," +
                 "FOREIGN KEY($KEY_RECENT_BOOK) REFERENCES $TABLE_BOOKS($KEY_BOOK_ID) DEFERRABLE INITIALLY DEFERRED)")
 
+
         val CREATE_BOOKS_TABLE = ("CREATE TABLE $TABLE_BOOKS($KEY_BOOK_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "$KEY_BOOK_TITLE TEXT NOT NULL,$KEY_BOOK_AUTHOR TEXT NOT NULL,$KEY_BOOK_PAGES INTEGER NOT NULL," +
                 "$KEY_BOOK_GENRE TEXT NOT NULL,$KEY_BOOK_PUBLISHER TEXT NOT NULL,$KEY_BOOK_YEAR_PUBLISHED INTEGER NOT NULL," +
                 "$KEY_BOOK_ISBN TEXT NOT NULL,$KEY_BOOK_RATING REAL,$KEY_BOOK_READ_STATUS INTEGER NOT NULL,$KEY_BOOK_IMAGE BLOB,$KEY_BOOK_OWNER INTEGER NOT NULL," +
                 "FOREIGN KEY($KEY_BOOK_OWNER) REFERENCES $TABLE_USERS($KEY_ID))")
+        
         p0?.execSQL(CREATE_WIZARDS_TABLE)
         p0?.execSQL(CREATE_BOOKS_TABLE)
     }
@@ -156,6 +160,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
 
                 val book = BookModelClass(_id, bookTitle, bookAuthor, bookNumberOfPages, bookGenre,
                     bookPublisher, bookYearPublished, ISBN, bookStarRating, bookReadStatus, bookImage, bookOwner)
+
                 bookList.add(book)
             } while (cursor.moveToNext())
         }
@@ -211,6 +216,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
 
                 book = BookModelClass(_bookID, bookTitle, bookAuthor, bookNumberOfPages, bookGenre,
                     bookPublisher, bookYearPublished, bookISBN, bookStarRating, bookReadStatus, bookImage, bookOwner)
+
             } while (cursor.moveToNext())
         }
         cursor.close()
@@ -806,6 +812,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         var bookStarRating: Float
         var bookReadStatus: Int
         var bookImage: ByteArray?
+
         var bookOwner: Int
 
         if (cursor!!.moveToFirst()) {
@@ -825,6 +832,7 @@ class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
 
                 val book = BookModelClass(_bookID, bookTitle, bookAuthor, bookNumberOfPages, bookGenre,
                     bookPublisher, bookYearPublished, bookISBN, bookStarRating, bookReadStatus, bookImage, bookOwner)
+
                 completedBooks.add(book)
             } while (cursor.moveToNext())
         }

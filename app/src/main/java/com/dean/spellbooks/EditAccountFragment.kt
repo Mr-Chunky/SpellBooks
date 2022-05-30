@@ -81,6 +81,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
         btnEditAccountFavBook = view.findViewById(R.id.btnEditAccountFavBook);      tvEditAccountFavBook = view.findViewById(R.id.tvEditAccountFavBook)
         btnEditAccountBookGoal = view.findViewById(R.id.btnEditAccountBookGoal);    tvEditAccountBookGoal = view.findViewById(R.id.tvEditAccountBookGoal)
         btnEditAccountPageGoal = view.findViewById(R.id.btnEditAccountPageGoal);    tvEditAccountPageGoal = view.findViewById(R.id.tvEditAccountPageGoal)
+
     }
 
     private fun setUpTextViewTexts() {
