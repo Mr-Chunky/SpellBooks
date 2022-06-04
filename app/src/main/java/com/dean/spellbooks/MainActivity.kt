@@ -16,6 +16,9 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var userID: Int? = null
         var bookID: Int? = null
+
+        val REQUEST_CAMERA_PERMISSION = 1
+        val REQUEST_CAMERA_USAGE = 2
     }
 
 

@@ -1,13 +1,16 @@
 package com.dean.spellbooks
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+
 
 class BookAdapter(context: Context, private val bookList: ArrayList<BookModelClass>) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
 
@@ -25,6 +28,7 @@ class BookAdapter(context: Context, private val bookList: ArrayList<BookModelCla
     class ViewHolder(itemView: View, selectListener: onItemSelectedListener) : RecyclerView.ViewHolder(itemView) {
         val tvListBookTitle: TextView = itemView.findViewById(R.id.tvListBookTitle)
         val tvListBookAuthor: TextView = itemView.findViewById(R.id.tvListBookAuthor)
+        val ivListBookImage: ImageView = itemView.findViewById(R.id.ivListBookImage)
         val cbBookRead: CheckBox = itemView.findViewById(R.id.cbBookRead)
 
         init {
@@ -48,6 +52,12 @@ class BookAdapter(context: Context, private val bookList: ArrayList<BookModelCla
 
         dbHandler = DBHandler(holder.itemView.context)
 
+        val pictureByteArray: ByteArray? = dbHandler.getBookImage(book.bookID!!)
+        val pictureBitmap: Bitmap = convertToBitmap(pictureByteArray!!)!!
+
+        if (pictureBitmap != null)
+            holder.ivListBookImage.setImageBitmap(pictureBitmap)
+
         holder.cbBookRead.setOnClickListener {
 
             if (holder.cbBookRead.isChecked) {
@@ -68,5 +78,9 @@ class BookAdapter(context: Context, private val bookList: ArrayList<BookModelCla
 
     override fun getItemCount(): Int {
         return bookList.size
+    }
+
+    private fun convertToBitmap(image: ByteArray): Bitmap? {
+        return BitmapFactory.decodeByteArray(image, 0, image.size)
     }
 }

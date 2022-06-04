@@ -1,6 +1,14 @@
 package com.dean.spellbooks
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,15 +17,18 @@ import android.widget.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import java.io.ByteArrayOutputStream
 
 // TODO: HANDLE NEW BOOK IMAGE
 
 class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
     var navigationController: NavController? = null
+    private var pictureByteArray: ByteArray? = null
     var dbHandler: DBHandler? = null
 
     private lateinit var genres: Array<out String>
     private lateinit var spinnerText: String
+    private lateinit var ibEditBookImage: ImageButton
     // These UI elements will be programmed in pairs
     private lateinit var spinEditBookGenre: Spinner;        private lateinit var llEditBookSpinnerHolder: LinearLayout
     private lateinit var etEditBookNewValue: EditText;      private lateinit var llEditBookButtonBar: LinearLayout
@@ -58,7 +69,19 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
         setUpButtonClickListeners()
 
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == MainActivity.REQUEST_CAMERA_USAGE && resultCode == Activity.RESULT_OK) {
+            val pictureBmp = data!!.extras!!.get("data") as Bitmap
+            ibEditBookImage.setImageBitmap(pictureBmp)
+
+            pictureByteArray = convertToByteArray(pictureBmp)
+
+            val book = dbHandler!!.getBook(MainActivity.bookID!!)
+            book!!.bookImage = pictureByteArray
+            dbHandler!!.updateBookInformation(book)
+        }
     }
 
     private fun initialiseUIElements(view: View) {
@@ -73,7 +96,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         tvEditBookStarRating = view.findViewById(R.id.tvEditBookStarRating);        btnEditBookStarRating = view.findViewById(R.id.btnEditBookStarRating)
         btnEditBookCancel = view.findViewById(R.id.btnEditBookCancel);              btnEditBookSave = view.findViewById(R.id.btnEditBookSave)
         spinEditBookGenre = view.findViewById(R.id.spinEditBookGenre);              llEditBookSpinnerHolder = view.findViewById(R.id.llEditBookSpinnerHolder)
-        btnEditBookReturn = view.findViewById(R.id.btnEditBookReturn)
+        btnEditBookReturn = view.findViewById(R.id.btnEditBookReturn);              ibEditBookImage = view.findViewById(R.id.ibEditBookImage)
     }
 
     private fun setOptionalElementsVisibility(visibility: Int) {
@@ -122,6 +145,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         btnEditBookISBN.setOnClickListener(this)
         btnEditBookStarRating.setOnClickListener(this)
         btnEditBookReturn.setOnClickListener(this)
+        ibEditBookImage.setOnClickListener(this)
     }
 
     private fun setUpGenreSpinner() {
@@ -145,6 +169,12 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
     override fun onClick(p0: View?) {
         when(p0) {
+            ibEditBookImage -> {
+                if(requireContext().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                    requestPermissions(arrayOf(Manifest.permission.CAMERA), MainActivity.REQUEST_CAMERA_PERMISSION)
+                else
+                    takePicture()
+            }
             btnEditBookTitle -> {
                 btnEditBookTitle.visibility = View.GONE
                 setOptionalElementsVisibility(1)
@@ -401,6 +431,23 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
             return true
         }
         return false
+    }
+
+    private fun takePicture() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        try {
+            startActivityForResult(intent, MainActivity.REQUEST_CAMERA_USAGE)
+        } catch (e: Exception) {
+            Log.e("camera", e.stackTraceToString())
+        }
+    }
+
+    private fun convertToByteArray(bitmap: Bitmap): ByteArray? {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream)
+        val pictureByteArray = stream.toByteArray()
+        stream.close()
+        return pictureByteArray
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {

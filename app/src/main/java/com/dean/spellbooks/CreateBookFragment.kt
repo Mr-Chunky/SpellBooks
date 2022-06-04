@@ -1,17 +1,28 @@
 package com.dean.spellbooks
 
+import android.Manifest
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import java.io.ByteArrayOutputStream
+
 
 class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private var navigationController: NavController? = null
+    private var pictureByteArray: ByteArray? = null
 
     private lateinit var etCreateBookTitle: EditText
     private lateinit var etCreateBookAuthor: EditText
@@ -21,6 +32,7 @@ class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemS
     private lateinit var etCreateBookYearPublished: EditText
     private lateinit var etCreateBookISBN: EditText
     private lateinit var etCreateBookStarRating: EditText
+    private lateinit var ibCreateBookImage: ImageButton
     private lateinit var btnCancelCreateBook: Button
     private lateinit var btnSaveCreateBook: Button
     private lateinit var genres: Array<out String>
@@ -46,6 +58,15 @@ class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemS
         setUpGenreSpinner()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == MainActivity.REQUEST_CAMERA_USAGE && resultCode == RESULT_OK) {
+            val pictureBmp = data!!.extras!!.get("data") as Bitmap
+            ibCreateBookImage.setImageBitmap(pictureBmp)
+
+            pictureByteArray = convertToByteArray(pictureBmp)
+        }
+    }
+
     private fun initialiseUIElements(view: View) {
         etCreateBookTitle = view.findViewById(R.id.etCreateBookTitle)
         etCreateBookAuthor = view.findViewById(R.id.etCreateBookAuthor)
@@ -55,11 +76,13 @@ class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemS
         etCreateBookYearPublished = view.findViewById(R.id.etCreateBookYearPublished)
         etCreateBookISBN = view.findViewById(R.id.etCreateBookISBN)
         etCreateBookStarRating = view.findViewById(R.id.etCreateBookStarRating)
+        ibCreateBookImage = view.findViewById(R.id.ibCreateBookImage)
         btnCancelCreateBook = view.findViewById(R.id.btnCancelCreateBook)
         btnSaveCreateBook = view.findViewById(R.id.btnSaveCreateBook)
     }
 
     private fun setUpButtonClickListeners() {
+        ibCreateBookImage.setOnClickListener(this)
         btnCancelCreateBook.setOnClickListener(this)
         btnSaveCreateBook.setOnClickListener(this)
     }
@@ -90,11 +113,11 @@ class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemS
             val bookYearPublished: Int = etCreateBookYearPublished.text.toString().trim().toInt()
             val ISBN: String = etCreateBookISBN.text.toString().trim()
             val bookStarRating: Float = etCreateBookStarRating.text.toString().trim().toFloat()
-            val bookImage: ByteArray    // TODO: IMPLEMENT THIS
+            val bookImage: ByteArray? = pictureByteArray
             val dbHandler: DBHandler = DBHandler(requireContext())
 
             val status = dbHandler.addBook(BookModelClass(null, bookTitle, bookAuthor, bookPages,
-                bookGenre, bookPublisher, bookYearPublished, ISBN, bookStarRating, 0, null, MainActivity.userID!!))
+                bookGenre, bookPublisher, bookYearPublished, ISBN, bookStarRating, 0, bookImage, MainActivity.userID!!))
 
 
             if (status > -1) {
@@ -119,6 +142,12 @@ class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemS
 
     override fun onClick(p0: View?) {
         when (p0) {
+            ibCreateBookImage -> {
+                if(requireContext().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                    requestPermissions(arrayOf(Manifest.permission.CAMERA), MainActivity.REQUEST_CAMERA_PERMISSION)
+                else
+                    takePicture()
+            }
             btnCancelCreateBook -> {
                 navigationController!!.navigate(R.id.action_createBookFragment_to_bookListFragment)
                 Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
@@ -129,6 +158,24 @@ class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemS
                 navigationController!!.navigate(R.id.action_createBookFragment_to_bookListFragment)
             }
         }
+    }
+
+    private fun takePicture() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        try {
+            startActivityForResult(intent, MainActivity.REQUEST_CAMERA_USAGE)
+        } catch (e: Exception) {
+            Log.e("camera", e.stackTraceToString())
+        }
+    }
+
+    // Converts the bitmap of the picture specified in onActivityResult() to a ByteArray to be stored in the database
+    private fun convertToByteArray(bitmap: Bitmap): ByteArray? {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(CompressFormat.PNG, 0, stream)
+        val pictureByteArray = stream.toByteArray()
+        stream.close()
+        return pictureByteArray
     }
 
     private fun isNumeric(string: String): Boolean {
