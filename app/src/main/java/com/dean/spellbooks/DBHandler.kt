@@ -7,12 +7,9 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import android.widget.Toast
 
 class DBHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-
-    // TODO: ADD A NEW FIELD TO BOOKS (BOOK IMAGE)
     // TODO: CREATE A UTILITY CLASS TO AVOID GOD CLASS
     // TODO: IMPLEMENT SINGLETON PATTERN
     // TODO: DOCUMENT THIS CLASS

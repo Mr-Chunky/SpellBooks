@@ -8,353 +8,359 @@
     android:background="@color/grey"
     tools:context=".EditBookFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvEditBookCard">
-
-        <EditText
-            android:id="@+id/etEditBookNewValue"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-
-            android:layout_marginEnd="10dp"
-            android:ems="10"
-            android:hint="@string/enter_a_new_value"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:textColorHint="#000000" />
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/llEditBookSpinnerHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal">
+            android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/tvEditBookGenreNotifier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="10dp"
-                android:text="@string/select_a_genre"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <Spinner
-                android:id="@+id/spinEditBookGenre"
+                android:id="@+id/cvEditBookTitle"
+                style="@style/page_heading_style"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:contentDescription="@string/select_a_genre" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/edit_book_info" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvEditBookCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/grey">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/ibEditBookImage"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@color/deep_red"
+                        android:contentDescription="@string/add_a_picture_to_the_book"
+                        android:src="@android:drawable/ic_menu_camera" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvEditBookTitleIndicator"
+                            style="@style/edit_field_text"
+                            android:text="@string/title" />
+
+                        <TextView
+                            android:id="@+id/tvEditBookTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:text="@string/placeholder"
+                            android:textColor="#000000" />
+
+                        <Button
+                            android:id="@+id/btnEditBookTitle"
+                            style="@style/edit_button_style"
+                            android:text="@string/edit"
+                            tools:ignore="DuplicateSpeakableTextCheck" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvEditBookAuthorIndicator"
+                            style="@style/edit_field_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/author" />
+
+                        <TextView
+                            android:id="@+id/tvEditBookAuthor"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4.5"
+                            android:text="@string/placeholder"
+                            android:textColor="#000000" />
+
+                        <Button
+                            android:id="@+id/btnEditBookAuthor"
+                            style="@style/edit_button_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvEditBookTotalPagesIndicator"
+                            style="@style/edit_field_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/total_pages" />
+
+                        <TextView
+                            android:id="@+id/tvEditBookTotalPages"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:text="@string/placeholder"
+                            android:textColor="#000000" />
+
+                        <Button
+                            android:id="@+id/btnEditBookTotalPages"
+                            style="@style/edit_button_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvEditBookGenreIndicator"
+                            style="@style/edit_field_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/genre" />
+
+                        <TextView
+                            android:id="@+id/tvEditBookGenre"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:text="@string/placeholder"
+                            android:textColor="#000000" />
+
+                        <Button
+                            android:id="@+id/btnEditBookGenre"
+                            style="@style/edit_button_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvEditBookPublisherIndicator"
+                            style="@style/edit_field_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/publisher" />
+
+                        <TextView
+                            android:id="@+id/tvEditBookPublisher"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="11"
+                            android:text="@string/placeholder"
+                            android:textColor="#000000" />
+
+                        <Button
+                            android:id="@+id/btnEditBookPublisher"
+                            style="@style/edit_button_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvEditBookYearPublishedIndicator"
+                            style="@style/edit_field_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/year_published" />
+
+                        <TextView
+                            android:id="@+id/tvEditBookYearPublished"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:text="@string/placeholder"
+                            android:textColor="#000000" />
+
+                        <Button
+                            android:id="@+id/btnEditBookYearPublished"
+                            style="@style/edit_button_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvEditBookISBNIndicator"
+                            style="@style/edit_field_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/isbn_code" />
+
+                        <TextView
+                            android:id="@+id/tvEditBookISBN"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="11"
+                            android:text="@string/placeholder"
+                            android:textColor="#000000" />
+
+                        <Button
+                            android:id="@+id/btnEditBookISBN"
+                            style="@style/edit_button_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvEditBookStarRatingIndicator"
+                            style="@style/edit_field_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/star_rating_1_5" />
+
+                        <TextView
+                            android:id="@+id/tvEditBookStarRating"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:text="@string/placeholder"
+                            android:textColor="#000000" />
+
+                        <Button
+                            android:id="@+id/btnEditBookStarRating"
+                            style="@style/edit_button_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edit" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etEditBookNewValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+
+                    android:layout_marginEnd="10dp"
+                    android:ems="10"
+                    android:hint="@string/enter_a_new_value"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:textColorHint="#000000" />
+
+                <LinearLayout
+                    android:id="@+id/llEditBookSpinnerHolder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvEditBookGenreNotifier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/select_a_genre"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/spinEditBookGenre"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:contentDescription="@string/select_a_genre" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llEditBookButtonBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    tools:layout_marginStart="10dp">
+
+                    <Button
+                        android:id="@+id/btnEditBookCancel"
+                        style="@style/cancel_button_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@android:string/cancel" />
+
+                    <Button
+                        android:id="@+id/btnEditBookSave"
+                        style="@style/save_button_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/save" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnEditBookReturn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="@color/deep_red"
+                    android:text="@string/back"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llEditBookButtonBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            tools:layout_marginStart="10dp">
-
-            <Button
-                android:id="@+id/btnEditBookCancel"
-                style="@style/cancel_button_style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@android:string/cancel" />
-
-            <Button
-                android:id="@+id/btnEditBookSave"
-                style="@style/save_button_style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/save" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnEditBookReturn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="@color/deep_red"
-            android:text="@string/back"
-            tools:ignore="TouchTargetSizeCheck" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/cvEditBookTitle"
-        style="@style/page_heading_style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="@string/edit_book_info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvEditBookCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/grey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvEditBookTitle">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/ibEditBookImage"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/deep_red"
-                android:contentDescription="@string/add_a_picture_to_the_book"
-                android:src="@android:drawable/ic_menu_camera" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvEditBookTitleIndicator"
-                    style="@style/edit_field_text"
-                    android:text="@string/title" />
-
-                <TextView
-                    android:id="@+id/tvEditBookTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:text="@string/placeholder"
-                    android:textColor="#000000" />
-
-                <Button
-                    android:id="@+id/btnEditBookTitle"
-                    style="@style/edit_button_style"
-                    android:text="@string/edit"
-                    tools:ignore="DuplicateSpeakableTextCheck" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvEditBookAuthorIndicator"
-                    style="@style/edit_field_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/author" />
-
-                <TextView
-                    android:id="@+id/tvEditBookAuthor"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4.5"
-                    android:text="@string/placeholder"
-                    android:textColor="#000000" />
-
-                <Button
-                    android:id="@+id/btnEditBookAuthor"
-                    style="@style/edit_button_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/edit" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvEditBookTotalPagesIndicator"
-                    style="@style/edit_field_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/total_pages" />
-
-                <TextView
-                    android:id="@+id/tvEditBookTotalPages"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="8"
-                    android:text="@string/placeholder"
-                    android:textColor="#000000" />
-
-                <Button
-                    android:id="@+id/btnEditBookTotalPages"
-                    style="@style/edit_button_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/edit" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvEditBookGenreIndicator"
-                    style="@style/edit_field_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/genre" />
-
-                <TextView
-                    android:id="@+id/tvEditBookGenre"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:text="@string/placeholder"
-                    android:textColor="#000000" />
-
-                <Button
-                    android:id="@+id/btnEditBookGenre"
-                    style="@style/edit_button_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/edit" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvEditBookPublisherIndicator"
-                    style="@style/edit_field_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/publisher" />
-
-                <TextView
-                    android:id="@+id/tvEditBookPublisher"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="11"
-                    android:text="@string/placeholder"
-                    android:textColor="#000000" />
-
-                <Button
-                    android:id="@+id/btnEditBookPublisher"
-                    style="@style/edit_button_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/edit" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvEditBookYearPublishedIndicator"
-                    style="@style/edit_field_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/year_published" />
-
-                <TextView
-                    android:id="@+id/tvEditBookYearPublished"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="8"
-                    android:text="@string/placeholder"
-                    android:textColor="#000000" />
-
-                <Button
-                    android:id="@+id/btnEditBookYearPublished"
-                    style="@style/edit_button_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/edit" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvEditBookISBNIndicator"
-                    style="@style/edit_field_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/isbn_code" />
-
-                <TextView
-                    android:id="@+id/tvEditBookISBN"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="11"
-                    android:text="@string/placeholder"
-                    android:textColor="#000000" />
-
-                <Button
-                    android:id="@+id/btnEditBookISBN"
-                    style="@style/edit_button_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/edit" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvEditBookStarRatingIndicator"
-                    style="@style/edit_field_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/star_rating_1_5" />
-
-                <TextView
-                    android:id="@+id/tvEditBookStarRating"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:text="@string/placeholder"
-                    android:textColor="#000000" />
-
-                <Button
-                    android:id="@+id/btnEditBookStarRating"
-                    style="@style/edit_button_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/edit" />
-            </LinearLayout>
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

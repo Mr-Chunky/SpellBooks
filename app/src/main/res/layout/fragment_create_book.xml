@@ -8,210 +8,213 @@
     android:background="@color/grey"
     tools:context=".CreateBookFragment">
 
-    <TextView
-        android:id="@+id/tvCreateBookTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="cursive"
-        android:shadowColor="@color/deep_red"
-        android:shadowDx="1.5"
-        android:shadowDy="1.5"
-        android:shadowRadius="1.5"
-        android:text="@string/add_book"
-        android:textColor="@color/deep_red"
-        android:textSize="55sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCreateBookTitle">
-
-        <ImageButton
-            android:id="@+id/ibCreateBookImage"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/deep_red"
-            android:contentDescription="@string/add_a_picture_to_the_book"
-            android:src="@android:drawable/ic_menu_camera" />
-
-        <EditText
-            android:id="@+id/etCreateBookTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="5dp"
-            android:ems="10"
-            android:hint="@string/title"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textColorHint="@color/black"
-            tools:ignore="TextContrastCheck" />
-
-        <EditText
-            android:id="@+id/etCreateBookAuthor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="5dp"
-            android:ems="10"
-            android:hint="@string/author"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textColorHint="@color/black"
-            tools:ignore="TextContrastCheck" />
-
-        <EditText
-            android:id="@+id/etCreateBookPages"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="5dp"
-            android:ems="10"
-            android:hint="@string/total_pages"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:textColorHint="@color/black"
-            tools:ignore="TextContrastCheck" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/tvCreateBookGenre"
+                android:id="@+id/tvCreateBookTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="10dp"
-                android:text="@string/genre"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:fontFamily="cursive"
+                android:shadowColor="@color/deep_red"
+                android:shadowDx="1.5"
+                android:shadowDy="1.5"
+                android:shadowRadius="1.5"
+                android:text="@string/add_book"
+                android:textColor="@color/deep_red"
+                android:textSize="55sp"
+                android:textStyle="bold" />
 
-            <Spinner
-                android:id="@+id/spinCreateBookGenre"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/genre"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                android:textColorHint="@color/black"
-                tools:ignore="TextContrastCheck,SpeakableTextPresentCheck" />
+                android:layout_marginTop="3dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/ibCreateBookImage"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/deep_red"
+                    android:contentDescription="@string/add_a_picture_to_the_book"
+                    android:src="@android:drawable/ic_menu_camera" />
+
+                <EditText
+                    android:id="@+id/etCreateBookTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="@string/title"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:textColorHint="@color/black"
+                    tools:ignore="TextContrastCheck" />
+
+                <EditText
+                    android:id="@+id/etCreateBookAuthor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="@string/author"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:textColorHint="@color/black"
+                    tools:ignore="TextContrastCheck" />
+
+                <EditText
+                    android:id="@+id/etCreateBookPages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="@string/total_pages"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:minHeight="48dp"
+                    android:textColorHint="@color/black"
+                    tools:ignore="TextContrastCheck" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvCreateBookGenre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/genre"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/spinCreateBookGenre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/genre"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:minHeight="48dp"
+                        android:textColorHint="@color/black"
+                        tools:ignore="TextContrastCheck,SpeakableTextPresentCheck" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/etCreateBookPublisher"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="@string/publisher"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:textColorHint="@color/black"
+                    tools:ignore="TextContrastCheck" />
+
+                <EditText
+                    android:id="@+id/etCreateBookYearPublished"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="@string/year_published"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:minHeight="48dp"
+                    android:textColorHint="@color/black"
+                    tools:ignore="TextContrastCheck" />
+
+                <EditText
+                    android:id="@+id/etCreateBookISBN"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="@string/isbn_code"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:textColorHint="@color/black" />
+
+                <EditText
+                    android:id="@+id/etCreateBookStarRating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:ems="10"
+                    android:hint="@string/star_rating_1_5"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:minHeight="48dp"
+                    android:textColorHint="@color/black"
+                    tools:ignore="TextContrastCheck" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnCancelCreateBook"
+                        style="@style/cancel_button_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@android:string/cancel" />
+
+                    <Button
+                        android:id="@+id/btnSaveCreateBook"
+                        style="@style/save_button_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add" />
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
+    </ScrollView>
 
-        <EditText
-            android:id="@+id/etCreateBookPublisher"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="5dp"
-            android:ems="10"
-            android:hint="@string/publisher"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textColorHint="@color/black"
-            tools:ignore="TextContrastCheck" />
-
-        <EditText
-            android:id="@+id/etCreateBookYearPublished"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="5dp"
-            android:ems="10"
-            android:hint="@string/year_published"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:textColorHint="@color/black"
-            tools:ignore="TextContrastCheck" />
-
-        <EditText
-            android:id="@+id/etCreateBookISBN"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="5dp"
-            android:ems="10"
-            android:hint="@string/isbn_code"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:textColorHint="@color/black" />
-
-        <EditText
-            android:id="@+id/etCreateBookStarRating"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="5dp"
-            android:ems="10"
-            android:hint="@string/star_rating_1_5"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:textColorHint="@color/black"
-            tools:ignore="TextContrastCheck" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="3dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnCancelCreateBook"
-                style="@style/cancel_button_style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@android:string/cancel" />
-
-            <Button
-                android:id="@+id/btnSaveCreateBook"
-                style="@style/save_button_style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/add" />
-        </LinearLayout>
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

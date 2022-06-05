@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -18,8 +17,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import java.io.ByteArrayOutputStream
-
-// TODO: HANDLE NEW BOOK IMAGE
 
 class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
     var navigationController: NavController? = null
