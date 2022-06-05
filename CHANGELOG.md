@@ -4,6 +4,8 @@
 
 * **accessibility:**  Add ScrollViews, adjust colours ([9d16a5a7](https://github.com/Mr-Chunky/SpellBooks/commit/9d16a5a794668121b2b1f9ab3bba6685647c26ed))
 
+------------------------------------------------------------------------
+
 #### 1.0.0 (2022-06-04)
 
 ##### Documentation Changes
@@ -23,6 +25,8 @@
 
 * **images:**  Fix picture position on list item ([f2cc02c0](https://github.com/Mr-Chunky/SpellBooks/commit/f2cc02c0d16da1e3dc0f14dc16a18e9acbebbe3a))
 
+------------------------------------------------------------------------
+
 #### 1.0.0 (2022-05-30)
 
 ##### Breaking Changes
@@ -36,6 +40,8 @@
 ##### Refactors
 
 * **formatting:**  Format text for legibility ([08f05755](https://github.com/Mr-Chunky/SpellBooks/commit/08f0575555a42f6c4c6193bbc4ae12b4e8b8a5a5))
+
+------------------------------------------------------------------------
 
 #### 1.0.0 (2022-05-28)
 
