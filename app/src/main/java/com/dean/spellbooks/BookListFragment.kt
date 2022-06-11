@@ -42,7 +42,7 @@ class BookListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigationController = Navigation.findNavController(view)
-        dbHandler = DBHandler(requireContext())
+        dbHandler = DBHandler.getDBHandler(requireContext())
         recyclerView = view.findViewById(R.id.rvBookList)
         val ivAddBook: ImageView = view.findViewById(R.id.ivAddBook)
 

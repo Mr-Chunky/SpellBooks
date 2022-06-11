@@ -41,7 +41,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigationController = Navigation.findNavController(view)
-        dbHandler = DBHandler(requireContext())
+        dbHandler = DBHandler.getDBHandler(requireContext())
 
         initialiseUIElements(view)
 

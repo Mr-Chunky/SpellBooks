@@ -50,7 +50,7 @@ class BookAdapter(context: Context, private val bookList: ArrayList<BookModelCla
 
         holder.cbBookRead.isChecked = book.readStatus == 1
 
-        dbHandler = DBHandler(holder.itemView.context)
+        dbHandler = DBHandler.getDBHandler(holder.itemView.context)
 
         val pictureByteArray: ByteArray? = dbHandler.getBookImage(book.bookID!!)
         val pictureBitmap: Bitmap = convertToBitmap(pictureByteArray!!)!!

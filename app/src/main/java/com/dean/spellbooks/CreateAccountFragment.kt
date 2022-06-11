@@ -79,7 +79,7 @@ class CreateAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
             val favouriteBook = etNewFavouriteBook.text.toString().trim()
             val bookGoal = etNewBookGoal.text.toString().trim().toInt()
             val pageGoal = etNewPageGoal.text.toString().trim().toInt()
-            val dbHandler: DBHandler = DBHandler(requireContext())
+            val dbHandler: DBHandler = DBHandler.getDBHandler(requireContext())
 
             val status = dbHandler.registerWizard(UserModelClass(null, username, password,
                 favouriteGenre, favouriteBook, bookGoal, pageGoal, null))

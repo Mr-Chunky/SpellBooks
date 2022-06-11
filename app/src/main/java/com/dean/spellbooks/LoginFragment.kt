@@ -33,7 +33,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigationController = Navigation.findNavController(view)
-        val dbHandler: DBHandler = DBHandler(requireContext())
+        val dbHandler: DBHandler = DBHandler.getDBHandler(requireContext())
 
         val tvCreateAccountLink: TextView = view.findViewById(R.id.tvCreateAccountLink)
         val etLoginUsername: EditText = view.findViewById(R.id.etLoginUsername)

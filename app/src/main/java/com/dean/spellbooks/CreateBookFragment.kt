@@ -114,7 +114,7 @@ class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemS
             val ISBN: String = etCreateBookISBN.text.toString().trim()
             val bookStarRating: Float = etCreateBookStarRating.text.toString().trim().toFloat()
             val bookImage: ByteArray? = pictureByteArray
-            val dbHandler: DBHandler = DBHandler(requireContext())
+            val dbHandler: DBHandler = DBHandler.getDBHandler(requireContext())
 
             val status = dbHandler.addBook(BookModelClass(null, bookTitle, bookAuthor, bookPages,
                 bookGenre, bookPublisher, bookYearPublished, ISBN, bookStarRating, 0, bookImage, MainActivity.userID!!))

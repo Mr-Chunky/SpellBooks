@@ -54,7 +54,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigationController = Navigation.findNavController(view)
-        dbHandler = DBHandler(requireContext())
+        dbHandler = DBHandler.getDBHandler(requireContext())
 
         initialiseUIElements(view)
 
