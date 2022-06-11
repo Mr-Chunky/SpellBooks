@@ -1,6 +1,5 @@
 package com.dean.spellbooks
 
-import android.content.res.Resources
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

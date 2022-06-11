@@ -15,7 +15,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import java.io.ByteArrayOutputStream
 
 class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
