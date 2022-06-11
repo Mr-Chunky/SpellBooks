@@ -1,20 +1,13 @@
 package com.dean.spellbooks
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.core.view.isInvisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.navArgs
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -42,7 +35,7 @@ class BookListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigationController = Navigation.findNavController(view)
-        dbHandler = DBHandler(requireContext())
+        dbHandler = DBHandler.getDBHandler(requireContext())
         recyclerView = view.findViewById(R.id.rvBookList)
         val ivAddBook: ImageView = view.findViewById(R.id.ivAddBook)
 

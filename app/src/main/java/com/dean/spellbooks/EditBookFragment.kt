@@ -15,7 +15,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import java.io.ByteArrayOutputStream
 
 class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -46,15 +45,13 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        val view: View = inflater.inflate(R.layout.fragment_edit_book, container, false)
-
-        return view
+        return inflater.inflate(R.layout.fragment_edit_book, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigationController = Navigation.findNavController(view)
-        dbHandler = DBHandler(requireContext())
+        dbHandler = DBHandler.getDBHandler(requireContext())
 
         initialiseUIElements(view)
 
@@ -174,6 +171,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
             }
             btnEditBookTitle -> {
                 btnEditBookTitle.visibility = View.GONE
+                etEditBookNewValue.hint = "Enter a new title"
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -204,6 +202,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
             }
             btnEditBookAuthor -> {
                 btnEditBookAuthor.visibility = View.GONE
+                etEditBookNewValue.hint = "Enter a new author"
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -234,6 +233,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
             }
             btnEditBookTotalPages -> {
                 btnEditBookTotalPages.visibility = View.GONE
+                etEditBookNewValue.hint = "Enter new total pages"
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -294,6 +294,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
             }
             btnEditBookPublisher -> {
                 btnEditBookPublisher.visibility = View.GONE
+                etEditBookNewValue.hint = "Enter a new publisher"
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -324,6 +325,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
             }
             btnEditBookYearPublished -> {
                 btnEditBookYearPublished.visibility = View.GONE
+                etEditBookNewValue.hint = "Enter a new publishing year"
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -354,6 +356,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
             }
             btnEditBookISBN -> {
                 btnEditBookISBN.visibility = View.GONE
+                etEditBookNewValue.hint = "Enter a new ISBN code"
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -384,6 +387,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
             }
             btnEditBookStarRating -> {
                 btnEditBookStarRating.visibility = View.GONE
+                etEditBookNewValue.hint = "Enter a new star rating"
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {

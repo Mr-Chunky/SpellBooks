@@ -2,13 +2,6 @@ package com.dean.spellbooks
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
-import androidx.preference.PreferenceManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,8 +9,8 @@ class MainActivity : AppCompatActivity() {
         var userID: Int? = null
         var bookID: Int? = null
 
-        val REQUEST_CAMERA_PERMISSION = 1
-        val REQUEST_CAMERA_USAGE = 2
+        const val REQUEST_CAMERA_PERMISSION = 1
+        const val REQUEST_CAMERA_USAGE = 2
     }
 
 

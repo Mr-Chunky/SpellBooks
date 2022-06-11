@@ -37,7 +37,7 @@ class AccountDetailsFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigationController = Navigation.findNavController(view)
-        dbHandler = DBHandler(requireContext())
+        dbHandler = DBHandler.getDBHandler(requireContext())
         completedBooks = dbHandler!!.getUserCompletedBooks(MainActivity.userID!!)
 
 

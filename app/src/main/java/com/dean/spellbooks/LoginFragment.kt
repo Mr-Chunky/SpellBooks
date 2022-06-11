@@ -11,8 +11,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 
 class LoginFragment : Fragment() {
 
@@ -23,17 +21,13 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-
-        val view: View = inflater.inflate(R.layout.fragment_login, container, false)
-
-        return view
-
+        return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigationController = Navigation.findNavController(view)
-        val dbHandler: DBHandler = DBHandler(requireContext())
+        val dbHandler: DBHandler = DBHandler.getDBHandler(requireContext())
 
         val tvCreateAccountLink: TextView = view.findViewById(R.id.tvCreateAccountLink)
         val etLoginUsername: EditText = view.findViewById(R.id.etLoginUsername)
