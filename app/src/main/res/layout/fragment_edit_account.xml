@@ -7,11 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".EditAccountFragment">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/llEditAccountNavHolder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grey"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnvEditAccountNavigation"
+            style="@style/bottom_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/spellbooks_bottom_navigation_menu">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/grey"
+        app:layout_constraintBottom_toTopOf="@+id/llEditAccountNavHolder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -326,24 +348,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/llEditAccountNavHolder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14.5dp"
-                android:orientation="vertical">
-
-                <com.google.android.material.bottomnavigation.BottomNavigationView
-                    android:id="@+id/bnvEditAccountNavigation"
-                    style="@style/bottom_nav_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:itemIconTint="@color/white"
-                    app:itemTextColor="@color/white"
-                    app:menu="@menu/spellbooks_bottom_navigation_menu">
-
-                </com.google.android.material.bottomnavigation.BottomNavigationView>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

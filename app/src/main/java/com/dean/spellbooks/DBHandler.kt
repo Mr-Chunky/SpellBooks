@@ -7,14 +7,10 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import kotlinx.coroutines.internal.synchronized
-import java.util.concurrent.locks.Lock
-import kotlin.coroutines.coroutineContext
 
 class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     // TODO: CREATE A UTILITY CLASS TO AVOID GOD CLASS
-    // TODO: IMPLEMENT SINGLETON PATTERN
     // TODO: DOCUMENT THIS CLASS
 
     companion object {
@@ -24,7 +20,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
             if (instance != null)
                 return instance!!
 
-            return kotlin.synchronized(this) {
+            return synchronized(this) {
                 if (instance != null) {
                     instance!!
                 } else {
