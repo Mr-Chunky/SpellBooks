@@ -9,11 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
 class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
-
     // TODO: CREATE A UTILITY CLASS TO AVOID GOD CLASS
-    // TODO: DOCUMENT THIS CLASS
 
     companion object {
+
+        // Setting up the Singleton with thread-safety
         @Volatile private var instance: DBHandler? = null
 
         fun getDBHandler(context: Context): DBHandler {
@@ -30,6 +30,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
             }
         }
 
+        // Setting up database metadata
         private const val DATABASE_VERSION = 7
         private const val DATABASE_NAME = "SpellBooksDatabase"
         private const val TABLE_USERS = "WizardsTable"
@@ -88,6 +89,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         db!!.setForeignKeyConstraintsEnabled(true)
     }
 
+    // Add a new book to the books table of the database; currently used in CreateBookFragment.kt
     fun addBook(book: BookModelClass) : Long {
         val database = this.writableDatabase
 
@@ -111,6 +113,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return response
     }
 
+    // Add a new user to the users table of the database; currently used in CreateAccountFragment.kt
     fun registerWizard(wiz: UserModelClass): Long {
         val database = this.writableDatabase
 
@@ -130,6 +133,8 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return response
     }
 
+    // Fetches an ArrayList containing books that are attributed to a particular userID;
+    // currently used in BookListFragment.kt to display a user's added books in the RecyclerView
     fun viewUserBooks(userID: Int): ArrayList<BookModelClass> {
         val bookList: ArrayList<BookModelClass> = ArrayList()
 
@@ -183,6 +188,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return bookList
     }
 
+    // Returns a specific book based on that book's bookID
     fun getBook(bookID: Int): BookModelClass? {
         var book: BookModelClass? = null
 
@@ -236,6 +242,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return book
     }
 
+    // Returns a specific user based on that user's userID
     fun getWizard(userID: Int): UserModelClass? {
         var wiz: UserModelClass? = null
 
@@ -281,6 +288,8 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return wiz
     }
 
+    // Tells database to update a particular book's information for real-time "refreshing" of views
+    // inside a Fragment (for example in EditBookFragment.kt)
     fun updateBookInformation(book: BookModelClass): Int {
         val database = this.writableDatabase
         val values = ContentValues()
@@ -304,6 +313,8 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return response
     }
 
+    // Tells database to update a particular user's information for real-time "refreshing" of views
+    // inside a fragment (for example in EditAccountFragment.kt)
     fun updateWizardInformation(wiz: UserModelClass): Int {
         val database = this.writableDatabase
         val values = ContentValues()
@@ -322,6 +333,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return response
     }
 
+    // Not yet implemented, but can be used to delete a book entry from the database
     fun removeBook(book: BookModelClass): Int {
         val database = this.writableDatabase
         val values = ContentValues()
@@ -334,6 +346,9 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return response
     }
 
+    // Not yet implemented, but can be used to delete a user entry from the database
+    // IMPORTANT: Do not delete a user before you delete *ALL* of their associated books, or the app
+    // will crash and break
     fun removeWizard(wiz: UserModelClass): Int {
         val database = this.writableDatabase
         val values = ContentValues()
@@ -346,6 +361,8 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return response
     }
 
+    // Makes sure that a username and password match with what is stored inside the database;
+    // returns true if found in database and false if not found in database
     fun checkUsernameAndPassword(username: String, password: String): Boolean {
         val database = this.readableDatabase
         var cursor: Cursor? = null
@@ -367,6 +384,9 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return false
     }
 
+    // Used after checkUsernameAndPassword() to hold a reference to that user's ID.  Currently
+    // implemented in a way that passes this userID to the MainActivity.kt for a static reference
+    // to the currently logged-in user.  This should be improved in the future for security's sake.
     fun getUserID(username: String, password: String): Int {
         var userID: Int = -1
 
@@ -390,6 +410,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return userID
     }
 
+    // Returns the username of a particular user, by passing the MainActivity's userID reference
     fun getUsername(userID: Int): String {
         var username: String = ""
 
@@ -414,6 +435,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return username
     }
 
+    // Returns the password of a particular user, by passing the MainActivity's userID reference
     fun getUserPassword(userID: Int): String {
         var password: String = ""
 
@@ -438,6 +460,8 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return password
     }
 
+    // Returns the favourite genre of a particular user, by passing the MainActivity's userID
+    // reference
     fun getUserFavGenre(userID: Int): String {
         var favGenre: String = ""
 
@@ -462,6 +486,8 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return favGenre
     }
 
+    // Returns the favourite book of a particular user, by passing the MainActivity's userID
+    // reference
     fun getUserFavBook(userID: Int): String {
         var favBook: String = ""
 
@@ -486,6 +512,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return favBook
     }
 
+    // Returns the book goal of a particular user, by passing the MainActivity's userID reference
     fun getUserBookGoal(userID: Int): Int {
         var bookGoal: Int = 0
 
@@ -510,6 +537,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return bookGoal
     }
 
+    // Returns the page goal of a particular user, by passing the MainActivity's userID reference
     fun getUserPageGoal(userID: Int): Int {
         var pageGoal: Int = 0
 
@@ -534,6 +562,8 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return pageGoal
     }
 
+    // Returns the recently read book of a particular user, by passing the MainActivity's userID
+    // reference
     fun getUserRecentBook(userID: Int): Int {
         var recentBook: Int? = null
 
@@ -558,6 +588,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return recentBook!!
     }
 
+    // Returns the title of a particular book, by passing the MainActivity's bookID reference
     fun getBookTitle(bookID: Int): String {
         var bookTitle: String = ""
 
@@ -582,6 +613,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return bookTitle
     }
 
+    // Returns the author of a particular book, by passing the MainActivity's bookID reference
     fun getBookAuthor(bookID: Int): String {
         var bookAuthor: String = ""
 
@@ -606,6 +638,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return bookAuthor
     }
 
+    // Returns the total pages of a particular book, by passing the MainActivity's bookID reference
     fun getBookTotalPages(bookID: Int): Int {
         var bookTotalPages: Int = 0
 
@@ -630,6 +663,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return bookTotalPages
     }
 
+    // Returns the genre of a particular book, by passing the MainActivity's bookID reference
     fun getBookGenre(bookID: Int): String {
         var bookGenre: String = ""
 
@@ -654,6 +688,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return bookGenre
     }
 
+    // Returns the publisher of a particular book, by passing the MainActivity's bookID reference
     fun getBookPublisher(bookID: Int): String {
         var bookPublisher: String = ""
 
@@ -678,6 +713,8 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return bookPublisher
     }
 
+    // Returns the publishing year of a particular book, by passing the MainActivity's bookID
+    // reference
     fun getBookYearPublished(bookID: Int): Int {
         var bookYearPublished: Int = 0
 
@@ -702,6 +739,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return bookYearPublished
     }
 
+    // Returns the ISBN code of a particular book, by passing the MainActivity's bookID reference
     fun getBookISBN(bookID: Int): String {
         var bookISBN: String = ""
 
@@ -726,6 +764,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return bookISBN
     }
 
+    // Returns the rating of a particular book, by passing the MainActivity's bookID reference
     fun getBookStarRating(bookID: Int): Float {
         var bookStarRating: Float = 0F
 
@@ -750,30 +789,9 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return bookStarRating
     }
 
-    fun getBookReadStatus(bookID: Int): Int {
-        var bookReadStatus: Int = 0
-
-        val select = "SELECT $KEY_BOOK_READ_STATUS FROM $TABLE_BOOKS WHERE $KEY_BOOK_ID = ?"
-
-        val database = this.readableDatabase
-        var cursor: Cursor? = null
-
-        try {
-            cursor = database.rawQuery(select, arrayOf(bookID.toString()))
-        } catch (exception: SQLiteException) {
-            Log.e("sqlite", "Unable to get book read status given the book ID")
-        }
-
-        if (cursor!!.moveToFirst()) {
-            do {
-                bookReadStatus = cursor.getInt(cursor.getColumnIndexOrThrow(KEY_BOOK_READ_STATUS))
-            } while (cursor.moveToNext())
-        }
-        cursor.close()
-        database.close()
-        return bookReadStatus
-    }
-
+    // Returns the image ByteArray of a particular book, by passing the MainActivity's bookID
+    // reference; should be converted to a Bitmap thereafter to use in displaying images to
+    // ImageViews and ImageButtons
     fun getBookImage(bookID: Int): ByteArray? {
         var bookImage: ByteArray? = null
 
@@ -798,6 +816,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return bookImage
     }
 
+    // Returns an ArrayList of all books with a read status of 1 that belong to a particular user
     fun getUserCompletedBooks(userID: Int): ArrayList<BookModelClass> {
         val completedBooks: ArrayList<BookModelClass> = ArrayList()
 
@@ -853,7 +872,9 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return completedBooks
     }
 
-    // Receives completedBooks ArrayList from the getUserCompletedBooks() function
+    // Receives completedBooks ArrayList from the getUserCompletedBooks() function and calculates
+    // which genre is read most from a list of pre-defined genres that have been plugged into
+    // spinners throughout the app
     fun calculateMostReadGenre(completedBooks: ArrayList<BookModelClass>): String {
         var fantasyCount: Int = 0
         var horrorCount: Int = 0
@@ -909,45 +930,8 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         return "No genre is read more than another"
     }
 
-    // Receives completedBooks ArrayList from the getUserCompletedBooks() function
-    fun calculateRemainingGoalBooks(userID: Int, completedBooks: ArrayList<BookModelClass>): Int {
-        val remainingBooks: Int
-        val totalGoalBooks: Int = getUserBookGoal(userID)
-        var booksCompleted: Int = 0
-
-        for (book in completedBooks) {
-            if (book.readStatus == 1)
-                booksCompleted++
-        }
-
-        remainingBooks = if ((totalGoalBooks - booksCompleted) >= 0)
-            totalGoalBooks - booksCompleted
-        else
-            0
-
-        return remainingBooks
-    }
-
-    // Receives completedBooks ArrayList from the getUserCompletedBooks() function
-    fun calculateRemainingGoalPages(userID: Int, completedBooks: ArrayList<BookModelClass>): Int {
-        val remainingPages: Int
-        val totalGoalPages: Int = getUserPageGoal(userID)
-        var pagesCompleted: Int = 0
-
-        for (book in completedBooks) {
-            if (book.readStatus == 1)
-                pagesCompleted += book.bookNumberOfPages
-        }
-
-        remainingPages = if ((totalGoalPages - pagesCompleted) >= 0)
-            totalGoalPages - pagesCompleted
-        else
-            0
-
-        return remainingPages
-    }
-
-    // Receives completedBooks ArrayList from the getUserCompletedBooks() function
+    // Receives completedBooks ArrayList from the getUserCompletedBooks() function to calculate
+    // how many pages the user has successfully read based on the books they've completed
     fun calculatePagesProgress(completedBooks: ArrayList<BookModelClass>): Int {
         var pagesProgress: Int = 0
 
