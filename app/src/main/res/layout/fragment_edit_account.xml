@@ -69,24 +69,30 @@
                         android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tvEditAccountUsernameIndicator"
-                            style="@style/info_field_text"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
-                            android:text="@string/username_indicator"
-                            android:textColor="@color/black" />
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvEditAccountUsername"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="5"
-                            android:text="@string/placeholder"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
+                            <TextView
+                                android:id="@+id/tvEditAccountUsernameIndicator"
+                                style="@style/info_field_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/username_indicator"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvEditAccountUsername"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/placeholder"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+                        </LinearLayout>
 
                         <Button
                             android:id="@+id/btnEditAccountUsername"
@@ -104,24 +110,30 @@
                         android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tvEditAccountPasswordIndicator"
-                            style="@style/info_field_text"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
-                            android:text="@string/password_indicator"
-                            android:textColor="@color/black" />
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvEditAccountPassword"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="5"
-                            android:text="@string/placeholder"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
+                            <TextView
+                                android:id="@+id/tvEditAccountPasswordIndicator"
+                                style="@style/info_field_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/password_indicator"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvEditAccountPassword"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/placeholder"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+                        </LinearLayout>
 
                         <Button
                             android:id="@+id/btnEditAccountPassword"
@@ -138,24 +150,30 @@
                         android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tvEditAccountFavGenreIndicator"
-                            style="@style/info_field_text"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
-                            android:text="@string/favourite_genre_indicator"
-                            android:textColor="@color/black" />
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvEditAccountFavGenre"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="5"
-                            android:text="@string/placeholder"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
+                            <TextView
+                                android:id="@+id/tvEditAccountFavGenreIndicator"
+                                style="@style/info_field_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/favourite_genre_indicator"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvEditAccountFavGenre"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/placeholder"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+                        </LinearLayout>
 
                         <Button
                             android:id="@+id/btnEditAccountFavGenre"
@@ -172,24 +190,30 @@
                         android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tvEditAccountFavBookIndicator"
-                            style="@style/info_field_text"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
-                            android:text="@string/favourite_book_indicator"
-                            android:textColor="@color/black" />
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvEditAccountFavBook"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="5"
-                            android:text="@string/placeholder"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
+                            <TextView
+                                android:id="@+id/tvEditAccountFavBookIndicator"
+                                style="@style/info_field_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/favourite_book_indicator"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvEditAccountFavBook"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/placeholder"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+                        </LinearLayout>
 
                         <Button
                             android:id="@+id/btnEditAccountFavBook"
@@ -206,24 +230,30 @@
                         android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tvEditAccountBookGoalIndicator"
-                            style="@style/info_field_text"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
-                            android:text="@string/book_reading_goal_per_year_indicator"
-                            android:textColor="@color/black" />
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvEditAccountBookGoal"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="5"
-                            android:text="@string/placeholder"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
+                            <TextView
+                                android:id="@+id/tvEditAccountBookGoalIndicator"
+                                style="@style/info_field_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/book_reading_goal_per_year_indicator"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvEditAccountBookGoal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/placeholder"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+                        </LinearLayout>
 
                         <Button
                             android:id="@+id/btnEditAccountBookGoal"
@@ -242,24 +272,30 @@
                         android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tvEditAccountPageGoalIndicator"
-                            style="@style/info_field_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="5dp"
-                            android:text="@string/page_reading_goal_per_year_indicator"
-                            android:textColor="@color/black" />
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvEditAccountPageGoal"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="5"
-                            android:text="@string/placeholder"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
+                            <TextView
+                                android:id="@+id/tvEditAccountPageGoalIndicator"
+                                style="@style/info_field_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/page_reading_goal_per_year_indicator"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/tvEditAccountPageGoal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/placeholder"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+                        </LinearLayout>
 
                         <Button
                             android:id="@+id/btnEditAccountPageGoal"
