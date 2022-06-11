@@ -136,8 +136,8 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
     override fun onClick(p0: View?) {
         when (p0) {
             btnEditAccountUsername -> {
-
                 btnEditAccountUsername.visibility = View.GONE
+                etEditAccountValue.hint = "Enter a new username"
                 setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
@@ -170,6 +170,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
             }
             btnEditAccountPassword -> {
                 btnEditAccountPassword.visibility = View.GONE
+                etEditAccountValue.hint = "Enter a new password"
                 setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
@@ -234,6 +235,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
             }
             btnEditAccountFavBook -> {
                 btnEditAccountFavBook.visibility = View.GONE
+                etEditAccountValue.hint = "Enter a new favourite book"
                 setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
@@ -266,6 +268,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
             }
             btnEditAccountBookGoal -> {
                 btnEditAccountBookGoal.visibility = View.GONE
+                etEditAccountValue.hint = "Enter a new book goal"
                 setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
@@ -298,6 +301,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
             }
             btnEditAccountPageGoal -> {
                 btnEditAccountPageGoal.visibility = View.GONE
+                etEditAccountValue.hint = "Enter a new page goal"
                 setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
