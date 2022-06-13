@@ -27,6 +27,8 @@
   *  Revise layout of fragment_edit_book.xml ([8183a8cc](https://github.com/Mr-Chunky/SpellBooks/commit/8183a8cc4e0a7a08abec65b0994091b3b53ac203))
   *  Revise layout of fragment_edit_account.xml ([1b01c43b](https://github.com/Mr-Chunky/SpellBooks/commit/1b01c43b2efe0cd6af20914e37d01d21651d28d8))
 
+------------------------------------------------------------------------
+
 #### 1.0.0 (2022-06-05)
 
 ##### Bug Fixes
