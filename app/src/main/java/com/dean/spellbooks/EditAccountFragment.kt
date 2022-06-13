@@ -1,6 +1,7 @@
 package com.dean.spellbooks
 
 import android.os.Bundle
+import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -137,7 +138,13 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
         when (p0) {
             btnEditAccountUsername -> {
                 btnEditAccountUsername.visibility = View.GONE
+                btnEditAccountPassword.visibility = View.VISIBLE
+                btnEditAccountFavGenre.visibility = View.VISIBLE
+                btnEditAccountFavBook.visibility = View.VISIBLE
+                btnEditAccountBookGoal.visibility = View.VISIBLE
+                btnEditAccountPageGoal.visibility = View.VISIBLE
                 etEditAccountValue.hint = "Enter a new username"
+                etEditAccountValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
@@ -169,8 +176,14 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                 })
             }
             btnEditAccountPassword -> {
+                btnEditAccountUsername.visibility = View.VISIBLE
                 btnEditAccountPassword.visibility = View.GONE
+                btnEditAccountFavGenre.visibility = View.VISIBLE
+                btnEditAccountFavBook.visibility = View.VISIBLE
+                btnEditAccountBookGoal.visibility = View.VISIBLE
+                btnEditAccountPageGoal.visibility = View.VISIBLE
                 etEditAccountValue.hint = "Enter a new password"
+                etEditAccountValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
@@ -202,7 +215,12 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                 })
             }
             btnEditAccountFavGenre -> {
+                btnEditAccountUsername.visibility = View.VISIBLE
+                btnEditAccountPassword.visibility = View.VISIBLE
                 btnEditAccountFavGenre.visibility = View.GONE
+                btnEditAccountFavBook.visibility = View.VISIBLE
+                btnEditAccountBookGoal.visibility = View.VISIBLE
+                btnEditAccountPageGoal.visibility = View.VISIBLE
                 setOptionalElementsVisibility(2)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
@@ -234,8 +252,14 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                 })
             }
             btnEditAccountFavBook -> {
+                btnEditAccountUsername.visibility = View.VISIBLE
+                btnEditAccountPassword.visibility = View.VISIBLE
+                btnEditAccountFavGenre.visibility = View.VISIBLE
                 btnEditAccountFavBook.visibility = View.GONE
+                btnEditAccountBookGoal.visibility = View.VISIBLE
+                btnEditAccountPageGoal.visibility = View.VISIBLE
                 etEditAccountValue.hint = "Enter a new favourite book"
+                etEditAccountValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
@@ -267,8 +291,14 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                 })
             }
             btnEditAccountBookGoal -> {
+                btnEditAccountUsername.visibility = View.VISIBLE
+                btnEditAccountPassword.visibility = View.VISIBLE
+                btnEditAccountFavGenre.visibility = View.VISIBLE
+                btnEditAccountFavBook.visibility = View.VISIBLE
                 btnEditAccountBookGoal.visibility = View.GONE
+                btnEditAccountPageGoal.visibility = View.VISIBLE
                 etEditAccountValue.hint = "Enter a new book goal"
+                etEditAccountValue.inputType = InputType.TYPE_CLASS_NUMBER
                 setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {
@@ -300,8 +330,14 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                 })
             }
             btnEditAccountPageGoal -> {
+                btnEditAccountUsername.visibility = View.VISIBLE
+                btnEditAccountPassword.visibility = View.VISIBLE
+                btnEditAccountFavGenre.visibility = View.VISIBLE
+                btnEditAccountFavBook.visibility = View.VISIBLE
+                btnEditAccountBookGoal.visibility = View.VISIBLE
                 btnEditAccountPageGoal.visibility = View.GONE
                 etEditAccountValue.hint = "Enter a new page goal"
+                etEditAccountValue.inputType = InputType.TYPE_CLASS_NUMBER
                 setOptionalElementsVisibility(1)
 
                 btnEditAccountCancel.setOnClickListener(View.OnClickListener {

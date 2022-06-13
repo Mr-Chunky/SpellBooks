@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.InputType
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -182,8 +183,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                     takePicture()
             }
             btnEditBookTitle -> {
+                btnEditBookAuthor.visibility = View.VISIBLE
+                btnEditBookPublisher.visibility = View.VISIBLE
+                btnEditBookStarRating.visibility = View.VISIBLE
+                btnEditBookISBN.visibility = View.VISIBLE
+                btnEditBookYearPublished.visibility = View.VISIBLE
+                btnEditBookGenre.visibility = View.VISIBLE
+                btnEditBookTotalPages.visibility = View.VISIBLE
                 btnEditBookTitle.visibility = View.GONE
                 etEditBookNewValue.hint = "Enter a new title"
+                etEditBookNewValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -214,7 +223,15 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
             }
             btnEditBookAuthor -> {
                 btnEditBookAuthor.visibility = View.GONE
+                btnEditBookPublisher.visibility = View.VISIBLE
+                btnEditBookStarRating.visibility = View.VISIBLE
+                btnEditBookISBN.visibility = View.VISIBLE
+                btnEditBookYearPublished.visibility = View.VISIBLE
+                btnEditBookGenre.visibility = View.VISIBLE
+                btnEditBookTotalPages.visibility = View.VISIBLE
+                btnEditBookTitle.visibility = View.VISIBLE
                 etEditBookNewValue.hint = "Enter a new author"
+                etEditBookNewValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -244,8 +261,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 })
             }
             btnEditBookTotalPages -> {
+                btnEditBookAuthor.visibility = View.VISIBLE
+                btnEditBookPublisher.visibility = View.VISIBLE
+                btnEditBookStarRating.visibility = View.VISIBLE
+                btnEditBookISBN.visibility = View.VISIBLE
+                btnEditBookYearPublished.visibility = View.VISIBLE
+                btnEditBookGenre.visibility = View.VISIBLE
                 btnEditBookTotalPages.visibility = View.GONE
+                btnEditBookTitle.visibility = View.VISIBLE
                 etEditBookNewValue.hint = "Enter new total pages"
+                etEditBookNewValue.inputType = InputType.TYPE_CLASS_NUMBER
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -275,7 +300,14 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 })
             }
             btnEditBookGenre -> {
+                btnEditBookAuthor.visibility = View.VISIBLE
+                btnEditBookPublisher.visibility = View.VISIBLE
+                btnEditBookStarRating.visibility = View.VISIBLE
+                btnEditBookISBN.visibility = View.VISIBLE
+                btnEditBookYearPublished.visibility = View.VISIBLE
                 btnEditBookGenre.visibility = View.GONE
+                btnEditBookTotalPages.visibility = View.VISIBLE
+                btnEditBookTitle.visibility = View.VISIBLE
                 setOptionalElementsVisibility(2)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -305,8 +337,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 })
             }
             btnEditBookPublisher -> {
+                btnEditBookAuthor.visibility = View.VISIBLE
                 btnEditBookPublisher.visibility = View.GONE
+                btnEditBookStarRating.visibility = View.VISIBLE
+                btnEditBookISBN.visibility = View.VISIBLE
+                btnEditBookYearPublished.visibility = View.VISIBLE
+                btnEditBookGenre.visibility = View.VISIBLE
+                btnEditBookTotalPages.visibility = View.VISIBLE
+                btnEditBookTitle.visibility = View.VISIBLE
                 etEditBookNewValue.hint = "Enter a new publisher"
+                etEditBookNewValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -336,8 +376,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 })
             }
             btnEditBookYearPublished -> {
+                btnEditBookAuthor.visibility = View.VISIBLE
+                btnEditBookPublisher.visibility = View.VISIBLE
+                btnEditBookStarRating.visibility = View.VISIBLE
+                btnEditBookISBN.visibility = View.VISIBLE
                 btnEditBookYearPublished.visibility = View.GONE
+                btnEditBookGenre.visibility = View.VISIBLE
+                btnEditBookTotalPages.visibility = View.VISIBLE
+                btnEditBookTitle.visibility = View.VISIBLE
                 etEditBookNewValue.hint = "Enter a new publishing year"
+                etEditBookNewValue.inputType = InputType.TYPE_CLASS_NUMBER
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -367,8 +415,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 })
             }
             btnEditBookISBN -> {
+                btnEditBookAuthor.visibility = View.VISIBLE
+                btnEditBookPublisher.visibility = View.VISIBLE
+                btnEditBookStarRating.visibility = View.VISIBLE
                 btnEditBookISBN.visibility = View.GONE
+                btnEditBookYearPublished.visibility = View.VISIBLE
+                btnEditBookGenre.visibility = View.VISIBLE
+                btnEditBookTotalPages.visibility = View.VISIBLE
+                btnEditBookTitle.visibility = View.VISIBLE
                 etEditBookNewValue.hint = "Enter a new ISBN code"
+                etEditBookNewValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
@@ -398,8 +454,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 })
             }
             btnEditBookStarRating -> {
+                btnEditBookAuthor.visibility = View.VISIBLE
+                btnEditBookPublisher.visibility = View.VISIBLE
                 btnEditBookStarRating.visibility = View.GONE
+                btnEditBookISBN.visibility = View.VISIBLE
+                btnEditBookYearPublished.visibility = View.VISIBLE
+                btnEditBookGenre.visibility = View.VISIBLE
+                btnEditBookTotalPages.visibility = View.VISIBLE
+                btnEditBookTitle.visibility = View.VISIBLE
                 etEditBookNewValue.hint = "Enter a new star rating"
+                etEditBookNewValue.inputType = InputType.TYPE_CLASS_NUMBER
                 setOptionalElementsVisibility(1)
 
                 btnEditBookCancel.setOnClickListener(View.OnClickListener {
