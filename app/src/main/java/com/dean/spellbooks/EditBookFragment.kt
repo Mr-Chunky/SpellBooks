@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -54,6 +55,8 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         dbHandler = DBHandler.getDBHandler(requireContext())
 
         initialiseUIElements(view)
+
+        setUpImageButton()
 
         setOptionalElementsVisibility(0)
 
@@ -159,6 +162,15 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         tvEditBookYearPublished.text = dbHandler!!.getBookYearPublished(MainActivity.bookID!!).toString()
         tvEditBookISBN.text = dbHandler!!.getBookISBN(MainActivity.bookID!!)
         tvEditBookStarRating.text = dbHandler!!.getBookStarRating(MainActivity.bookID!!).toString()
+    }
+
+    private fun setUpImageButton() {
+        if (dbHandler!!.getBookImage(MainActivity.bookID!!) != null) {
+            val pictureByteArray: ByteArray? = dbHandler!!.getBookImage(MainActivity.bookID!!)
+            val pictureBitmap: Bitmap = BitmapFactory.decodeByteArray(pictureByteArray, 0, pictureByteArray!!.size)
+
+            ibEditBookImage.setImageBitmap(pictureBitmap)
+        }
     }
 
     override fun onClick(p0: View?) {
