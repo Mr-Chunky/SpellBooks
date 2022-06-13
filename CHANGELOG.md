@@ -1,3 +1,32 @@
+### 1.1.0 (2022-06-13)
+
+##### Chores
+
+* **layout:**
+  *  Change EditText hint depending on edit button pressed ([2b248c8c](https://github.com/Mr-Chunky/SpellBooks/commit/2b248c8cab4234b895cba5f5784c98b9df8fd6f3))
+  *  Change EditText hint depending on edit button pressed ([a6b9f413](https://github.com/Mr-Chunky/SpellBooks/commit/a6b9f413325364ff17fedbea5f46755e6b99f2cc))
+  *  Align fragment_edit_account.xml layout properly ([ccb2c258](https://github.com/Mr-Chunky/SpellBooks/commit/ccb2c25818926a9714a600e9c38306397aab8976))
+* **database:**  Document database functions, resolve TODOs ([2dc83c5b](https://github.com/Mr-Chunky/SpellBooks/commit/2dc83c5bc9220829c66b356666120b173991635d))
+
+##### Bug Fixes
+
+* **images:**
+  *  Display current book image in EditBookFragment.kt ([d893ee3c](https://github.com/Mr-Chunky/SpellBooks/commit/d893ee3cc1fcdfea8541f5b43300a4e6ac2ae55b))
+  *  Fix picture position on list item ([f2cc02c0](https://github.com/Mr-Chunky/SpellBooks/commit/f2cc02c0d16da1e3dc0f14dc16a18e9acbebbe3a))
+
+##### Refactors
+
+* **general:**  Remove unused imports ([cdad8566](https://github.com/Mr-Chunky/SpellBooks/commit/cdad8566fb0646f8354297c3a5e369b03e5bdcfe))
+* **database:**  Implement DBHandler.kt as thread-safe Singleton ([2ba0bafb](https://github.com/Mr-Chunky/SpellBooks/commit/2ba0bafb09bda5eb527fa9e6f0cb11d6a0f991e7))
+* **formatting:**  Format text for legibility ([08f05755](https://github.com/Mr-Chunky/SpellBooks/commit/08f0575555a42f6c4c6193bbc4ae12b4e8b8a5a5))
+* **clean-up:**  Fix dark background and refactor for legibility ([d0df5be2](https://github.com/Mr-Chunky/SpellBooks/commit/d0df5be28e9fea2ad9179a50f23c80465170989d))
+
+##### Code Style Changes
+
+* **layout:**
+  *  Revise layout of fragment_edit_book.xml ([8183a8cc](https://github.com/Mr-Chunky/SpellBooks/commit/8183a8cc4e0a7a08abec65b0994091b3b53ac203))
+  *  Revise layout of fragment_edit_account.xml ([1b01c43b](https://github.com/Mr-Chunky/SpellBooks/commit/1b01c43b2efe0cd6af20914e37d01d21651d28d8))
+
 #### 1.0.0 (2022-06-05)
 
 ##### Bug Fixes
