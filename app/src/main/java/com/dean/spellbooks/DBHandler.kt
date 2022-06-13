@@ -31,7 +31,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         }
 
         // Setting up database metadata
-        private const val DATABASE_VERSION = 7
+        private const val DATABASE_VERSION = 8
         private const val DATABASE_NAME = "SpellBooksDatabase"
         private const val TABLE_USERS = "WizardsTable"
         private const val TABLE_BOOKS = "BooksTable"
@@ -65,8 +65,7 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
     override fun onCreate(p0: SQLiteDatabase?) {
         val CREATE_WIZARDS_TABLE = ("CREATE TABLE $TABLE_USERS($KEY_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "$KEY_NAME TEXT NOT NULL,$KEY_PASSWORD TEXT NOT NULL,$KEY_FAVOURITE_GENRE TEXT NOT NULL,$KEY_FAVOURITE_BOOK TEXT NOT NULL," +
-                "$KEY_BOOKS_GOAL INTEGER NOT NULL,$KEY_PAGES_GOAL INTEGER NOT NULL,$KEY_RECENT_BOOK INTEGER," +
-                "FOREIGN KEY($KEY_RECENT_BOOK) REFERENCES $TABLE_BOOKS($KEY_BOOK_ID) DEFERRABLE INITIALLY DEFERRED)")
+                "$KEY_BOOKS_GOAL INTEGER NOT NULL,$KEY_PAGES_GOAL INTEGER NOT NULL,$KEY_RECENT_BOOK INTEGER)")
 
 
         val CREATE_BOOKS_TABLE = ("CREATE TABLE $TABLE_BOOKS($KEY_BOOK_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
