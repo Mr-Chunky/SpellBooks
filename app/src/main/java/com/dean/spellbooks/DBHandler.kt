@@ -361,6 +361,29 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
 
     // Makes sure that a username and password match with what is stored inside the database;
     // returns true if found in database and false if not found in database
+    fun checkUsername(username: String): Boolean {
+        val database = this.readableDatabase
+        var cursor: Cursor? = null
+
+        try {
+            cursor = database.query(TABLE_USERS, arrayOf(KEY_ID), "$KEY_NAME = ?",
+                arrayOf(username), null, null, null)
+        } catch (exception: SQLiteException) {
+            Log.e("sqlite","Error: Cannot parse the username provided.")
+        }
+
+        val cursorCount = cursor!!.count
+        cursor.close()
+        database.close()
+
+        if (cursorCount > 0)
+            return true
+
+        return false
+    }
+
+    // Makes sure that a username and password match with what is stored inside the database;
+    // returns true if found in database and false if not found in database
     fun checkUsernameAndPassword(username: String, password: String): Boolean {
         val database = this.readableDatabase
         var cursor: Cursor? = null
