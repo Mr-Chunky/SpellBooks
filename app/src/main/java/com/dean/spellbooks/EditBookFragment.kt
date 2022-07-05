@@ -17,12 +17,14 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import java.io.ByteArrayOutputStream
+import com.dean.spellbooks.SpellBooksUtils.Companion.checkEmpty
+import com.dean.spellbooks.SpellBooksUtils.Companion.convertToByteArray
+import com.dean.spellbooks.SpellBooksUtils.Companion.isNumeric
 
 class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
-    var navigationController: NavController? = null
+    private var navigationController: NavController? = null
     private var pictureByteArray: ByteArray? = null
-    var dbHandler: DBHandler? = null
+    private var dbHandler: DBHandler? = null
 
     private lateinit var genres: Array<out String>
     private lateinit var spinnerText: String
@@ -195,16 +197,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 etEditBookNewValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
-                btnEditBookCancel.setOnClickListener(View.OnClickListener {
+                btnEditBookCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditBookTitle.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditBookSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty())
+                btnEditBookSave.setOnClickListener {
+                    if (checkEmpty(etEditBookNewValue))
                         Toast.makeText(requireContext(), "Book Title field cannot be blank", Toast.LENGTH_SHORT).show()
                     else {
                         val book: BookModelClass = dbHandler!!.getBook(MainActivity.bookID!!)!!
@@ -219,7 +221,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
                         Toast.makeText(requireContext(), "Successfully updated Book Title", Toast.LENGTH_SHORT).show()
                     }
-                })
+                }
             }
             btnEditBookAuthor -> {
                 btnEditBookAuthor.visibility = View.GONE
@@ -234,16 +236,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 etEditBookNewValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
-                btnEditBookCancel.setOnClickListener(View.OnClickListener {
+                btnEditBookCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditBookAuthor.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditBookSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty())
+                btnEditBookSave.setOnClickListener {
+                    if (checkEmpty(etEditBookNewValue))
                         Toast.makeText(requireContext(), "Book Author field cannot be blank", Toast.LENGTH_SHORT).show()
                     else {
                         val book: BookModelClass = dbHandler!!.getBook(MainActivity.bookID!!)!!
@@ -258,7 +260,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
                         Toast.makeText(requireContext(), "Successfully updated Book Author", Toast.LENGTH_SHORT).show()
                     }
-                })
+                }
             }
             btnEditBookTotalPages -> {
                 btnEditBookAuthor.visibility = View.VISIBLE
@@ -273,16 +275,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 etEditBookNewValue.inputType = InputType.TYPE_CLASS_NUMBER
                 setOptionalElementsVisibility(1)
 
-                btnEditBookCancel.setOnClickListener(View.OnClickListener {
+                btnEditBookCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditBookTotalPages.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditBookSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty() || !isNumeric(etEditBookNewValue.text.toString().trim()))
+                btnEditBookSave.setOnClickListener {
+                    if (checkEmpty(etEditBookNewValue) || !isNumeric(etEditBookNewValue.text.toString().trim()))
                         Toast.makeText(requireContext(), "Book Pages field cannot be blank and must have numeric value", Toast.LENGTH_SHORT).show()
                     else {
                         val book: BookModelClass = dbHandler!!.getBook(MainActivity.bookID!!)!!
@@ -297,7 +299,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
                         Toast.makeText(requireContext(), "Successfully updated Book Total Pages", Toast.LENGTH_SHORT).show()
                     }
-                })
+                }
             }
             btnEditBookGenre -> {
                 btnEditBookAuthor.visibility = View.VISIBLE
@@ -310,15 +312,15 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 btnEditBookTitle.visibility = View.VISIBLE
                 setOptionalElementsVisibility(2)
 
-                btnEditBookCancel.setOnClickListener(View.OnClickListener {
+                btnEditBookCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditBookGenre.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditBookSave.setOnClickListener(View.OnClickListener {
+                btnEditBookSave.setOnClickListener {
                     if (spinnerText.isEmpty())
                         Toast.makeText(requireContext(), "Book Genre field cannot be blank", Toast.LENGTH_SHORT).show()
                     else {
@@ -334,7 +336,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
                         Toast.makeText(requireContext(), "Successfully updated Book Genre", Toast.LENGTH_SHORT).show()
                     }
-                })
+                }
             }
             btnEditBookPublisher -> {
                 btnEditBookAuthor.visibility = View.VISIBLE
@@ -349,16 +351,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 etEditBookNewValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
-                btnEditBookCancel.setOnClickListener(View.OnClickListener {
+                btnEditBookCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditBookPublisher.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditBookSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty())
+                btnEditBookSave.setOnClickListener {
+                    if (checkEmpty(etEditBookNewValue))
                         Toast.makeText(requireContext(), "Book Publisher field cannot be blank", Toast.LENGTH_SHORT).show()
                     else {
                         val book: BookModelClass = dbHandler!!.getBook(MainActivity.bookID!!)!!
@@ -373,7 +375,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
                         Toast.makeText(requireContext(), "Successfully updated Book Publisher", Toast.LENGTH_SHORT).show()
                     }
-                })
+                }
             }
             btnEditBookYearPublished -> {
                 btnEditBookAuthor.visibility = View.VISIBLE
@@ -388,16 +390,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 etEditBookNewValue.inputType = InputType.TYPE_CLASS_NUMBER
                 setOptionalElementsVisibility(1)
 
-                btnEditBookCancel.setOnClickListener(View.OnClickListener {
+                btnEditBookCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditBookYearPublished.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditBookSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty() || !isNumeric(etEditBookNewValue.text.toString().trim()))
+                btnEditBookSave.setOnClickListener {
+                    if (checkEmpty(etEditBookNewValue) || !isNumeric(etEditBookNewValue.text.toString().trim()))
                         Toast.makeText(requireContext(), "Book Year Published field cannot be blank and must have numeric value", Toast.LENGTH_SHORT).show()
                     else {
                         val book: BookModelClass = dbHandler!!.getBook(MainActivity.bookID!!)!!
@@ -412,7 +414,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
                         Toast.makeText(requireContext(), "Successfully updated Book Year Published", Toast.LENGTH_SHORT).show()
                     }
-                })
+                }
             }
             btnEditBookISBN -> {
                 btnEditBookAuthor.visibility = View.VISIBLE
@@ -427,16 +429,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 etEditBookNewValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
-                btnEditBookCancel.setOnClickListener(View.OnClickListener {
+                btnEditBookCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditBookISBN.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditBookSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty())
+                btnEditBookSave.setOnClickListener {
+                    if (checkEmpty(etEditBookNewValue))
                         Toast.makeText(requireContext(), "Book ISBN field cannot be blank", Toast.LENGTH_SHORT).show()
                     else {
                         val book: BookModelClass = dbHandler!!.getBook(MainActivity.bookID!!)!!
@@ -451,7 +453,7 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
 
                         Toast.makeText(requireContext(), "Successfully updated Book ISBN Code", Toast.LENGTH_SHORT).show()
                     }
-                })
+                }
             }
             btnEditBookStarRating -> {
                 btnEditBookAuthor.visibility = View.VISIBLE
@@ -466,16 +468,16 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                 etEditBookNewValue.inputType = InputType.TYPE_CLASS_NUMBER
                 setOptionalElementsVisibility(1)
 
-                btnEditBookCancel.setOnClickListener(View.OnClickListener {
+                btnEditBookCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditBookStarRating.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditBookSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty() || !isNumeric(etEditBookNewValue.text.toString().trim()))
+                btnEditBookSave.setOnClickListener {
+                    if (checkEmpty(etEditBookNewValue) || !isNumeric(etEditBookNewValue.text.toString().trim()))
                         Toast.makeText(requireContext(), "Book Rating field cannot be blank and must have numeric value", Toast.LENGTH_SHORT).show()
                     else {
                         val book: BookModelClass = dbHandler!!.getBook(MainActivity.bookID!!)!!
@@ -491,23 +493,12 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
                         Toast.makeText(requireContext(), "Successfully updated Book Rating", Toast.LENGTH_SHORT).show()
                     }
 
-                })
+                }
             }
             btnEditBookReturn -> {
                 navigationController!!.navigate(R.id.action_editBookFragment_to_bookListFragment)
             }
         }
-    }
-
-    private fun isNumeric(string: String): Boolean {
-        return string.all { char -> char.isDigit() }
-    }
-
-    private fun checkEmpty(): Boolean {
-        if (etEditBookNewValue.text.toString().trim() == "") {
-            return true
-        }
-        return false
     }
 
     private fun takePicture() {
@@ -519,16 +510,8 @@ class EditBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSel
         }
     }
 
-    private fun convertToByteArray(bitmap: Bitmap): ByteArray? {
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream)
-        val pictureByteArray = stream.toByteArray()
-        stream.close()
-        return pictureByteArray
-    }
-
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        spinnerText = genres[p2].toString()
+        spinnerText = genres[p2]
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.dean.spellbooks.SpellBooksUtils.Companion.checkEmpty
 
 class CreateAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -94,13 +95,6 @@ class CreateAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
         }
     }
 
-    private fun checkEmpty(editText: EditText): Boolean {
-        if (editText.text.toString().trim() == "") {
-            return true
-        }
-        return false
-    }
-
     override fun onClick(p0: View?) {
         if(p0!!.id == R.id.btnCancelCreateAccount) {
             navigationController!!.navigate(R.id.action_createAccountFragment_to_loginFragment)
@@ -112,7 +106,7 @@ class CreateAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        spinnerText = genres[p2].toString()
+        spinnerText = genres[p2]
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
