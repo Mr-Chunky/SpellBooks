@@ -34,7 +34,7 @@ class LoginFragment : Fragment() {
         val etLoginPassword: EditText = view.findViewById(R.id.etLoginPassword)
         val btnLogin : Button = view.findViewById(R.id.btnLogin)
 
-        btnLogin.setOnClickListener(View.OnClickListener {
+        btnLogin.setOnClickListener {
             if (dbHandler.checkUsernameAndPassword(etLoginUsername.text.toString(), etLoginPassword.text.toString())) {
 
                 // Using MainActivity's companion object to access the userID from anywhere in the app
@@ -49,13 +49,13 @@ class LoginFragment : Fragment() {
 
             etLoginUsername.text.clear()
             etLoginPassword.text.clear()
-        })
+        }
 
-        tvCreateAccountLink.setOnClickListener(View.OnClickListener {
+        tvCreateAccountLink.setOnClickListener {
             navigationController!!.navigate(R.id.action_loginFragment_to_createAccountFragment)
 
             etLoginUsername.text.clear()
             etLoginPassword.text.clear()
-        })
+        }
     }
 }

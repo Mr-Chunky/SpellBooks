@@ -5,7 +5,6 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Bitmap.CompressFormat
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -16,7 +15,10 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import java.io.ByteArrayOutputStream
+import com.dean.spellbooks.SpellBooksUtils.Companion.checkEmpty
+import com.dean.spellbooks.SpellBooksUtils.Companion.isNumeric
+import com.dean.spellbooks.SpellBooksUtils.Companion.convertToByteArray
+
 
 
 class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -133,13 +135,6 @@ class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemS
         }
     }
 
-    private fun checkEmpty(editText: EditText): Boolean {
-        if (editText.text.toString().trim() == "") {
-            return true
-        }
-        return false
-    }
-
     override fun onClick(p0: View?) {
         when (p0) {
             ibCreateBookImage -> {
@@ -169,21 +164,8 @@ class CreateBookFragment : Fragment(), View.OnClickListener, AdapterView.OnItemS
         }
     }
 
-    // Converts the bitmap of the picture specified in onActivityResult() to a ByteArray to be stored in the database
-    private fun convertToByteArray(bitmap: Bitmap): ByteArray? {
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(CompressFormat.PNG, 0, stream)
-        val pictureByteArray = stream.toByteArray()
-        stream.close()
-        return pictureByteArray
-    }
-
-    private fun isNumeric(string: String): Boolean {
-        return string.all { char -> char.isDigit() }
-    }
-
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        spinnerText = genres[p2].toString()
+        spinnerText = genres[p2]
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {

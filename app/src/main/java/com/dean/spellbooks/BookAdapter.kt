@@ -2,7 +2,6 @@ package com.dean.spellbooks
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.dean.spellbooks.SpellBooksUtils.Companion.convertToBitmap
 
 
 class BookAdapter(context: Context, private val bookList: ArrayList<BookModelClass>) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
@@ -78,9 +78,5 @@ class BookAdapter(context: Context, private val bookList: ArrayList<BookModelCla
 
     override fun getItemCount(): Int {
         return bookList.size
-    }
-
-    private fun convertToBitmap(image: ByteArray): Bitmap? {
-        return BitmapFactory.decodeByteArray(image, 0, image.size)
     }
 }

@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
 class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
-    // TODO: CREATE A UTILITY CLASS TO AVOID GOD CLASS
 
     companion object {
 

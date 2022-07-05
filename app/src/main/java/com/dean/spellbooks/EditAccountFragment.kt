@@ -11,6 +11,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.dean.spellbooks.SpellBooksUtils.Companion.checkEmpty
+import com.dean.spellbooks.SpellBooksUtils.Companion.isNumeric
 
 class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -147,16 +149,16 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                 etEditAccountValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
-                btnEditAccountCancel.setOnClickListener(View.OnClickListener {
+                btnEditAccountCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditAccountUsername.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditAccountSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty())
+                btnEditAccountSave.setOnClickListener {
+                    if (checkEmpty(etEditAccountValue))
                         Toast.makeText(requireContext(), "Username field cannot be blank", Toast.LENGTH_SHORT).show()
                     else {
                         val wiz: UserModelClass = dbHandler!!.getWizard(MainActivity.userID!!)!!
@@ -173,7 +175,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                             Toast.makeText(requireContext(), "Successfully updated username", Toast.LENGTH_SHORT).show()
                         }
                     }
-                })
+                }
             }
             btnEditAccountPassword -> {
                 btnEditAccountUsername.visibility = View.VISIBLE
@@ -186,16 +188,16 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                 etEditAccountValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
-                btnEditAccountCancel.setOnClickListener(View.OnClickListener {
+                btnEditAccountCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditAccountPassword.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditAccountSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty())
+                btnEditAccountSave.setOnClickListener {
+                    if (checkEmpty(etEditAccountValue))
                         Toast.makeText(requireContext(), "Password field cannot be blank", Toast.LENGTH_SHORT).show()
                     else {
                         val wiz: UserModelClass = dbHandler!!.getWizard(MainActivity.userID!!)!!
@@ -212,7 +214,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                             Toast.makeText(requireContext(), "Successfully updated password", Toast.LENGTH_SHORT).show()
                         }
                     }
-                })
+                }
             }
             btnEditAccountFavGenre -> {
                 btnEditAccountUsername.visibility = View.VISIBLE
@@ -223,15 +225,15 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                 btnEditAccountPageGoal.visibility = View.VISIBLE
                 setOptionalElementsVisibility(2)
 
-                btnEditAccountCancel.setOnClickListener(View.OnClickListener {
+                btnEditAccountCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditAccountFavGenre.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditAccountSave.setOnClickListener(View.OnClickListener {
+                btnEditAccountSave.setOnClickListener {
                     if (spinnerText.isEmpty())
                         Toast.makeText(requireContext(), "Favourite Genre field cannot be blank", Toast.LENGTH_SHORT).show()
                     else {
@@ -249,7 +251,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                             Toast.makeText(requireContext(), "Successfully updated favourite genre", Toast.LENGTH_SHORT).show()
                         }
                     }
-                })
+                }
             }
             btnEditAccountFavBook -> {
                 btnEditAccountUsername.visibility = View.VISIBLE
@@ -262,16 +264,16 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                 etEditAccountValue.inputType = InputType.TYPE_CLASS_TEXT
                 setOptionalElementsVisibility(1)
 
-                btnEditAccountCancel.setOnClickListener(View.OnClickListener {
+                btnEditAccountCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditAccountFavBook.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditAccountSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty())
+                btnEditAccountSave.setOnClickListener {
+                    if (checkEmpty(etEditAccountValue))
                         Toast.makeText(requireContext(), "Favourite Book field cannot be blank", Toast.LENGTH_SHORT).show()
                     else {
                         val wiz: UserModelClass = dbHandler!!.getWizard(MainActivity.userID!!)!!
@@ -288,7 +290,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                             Toast.makeText(requireContext(), "Successfully updated favourite book", Toast.LENGTH_SHORT).show()
                         }
                     }
-                })
+                }
             }
             btnEditAccountBookGoal -> {
                 btnEditAccountUsername.visibility = View.VISIBLE
@@ -301,16 +303,16 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                 etEditAccountValue.inputType = InputType.TYPE_CLASS_NUMBER
                 setOptionalElementsVisibility(1)
 
-                btnEditAccountCancel.setOnClickListener(View.OnClickListener {
+                btnEditAccountCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditAccountBookGoal.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditAccountSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty() || !isNumeric(etEditAccountValue.text.toString().trim()))
+                btnEditAccountSave.setOnClickListener {
+                    if (checkEmpty(etEditAccountValue) || !isNumeric(etEditAccountValue.text.toString().trim()))
                         Toast.makeText(requireContext(), "Book Goal field cannot be blank and must have a numeric value", Toast.LENGTH_SHORT).show()
                     else {
                         val wiz: UserModelClass = dbHandler!!.getWizard(MainActivity.userID!!)!!
@@ -327,7 +329,7 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                             Toast.makeText(requireContext(), "Successfully updated yearly book goal", Toast.LENGTH_SHORT).show()
                         }
                     }
-                })
+                }
             }
             btnEditAccountPageGoal -> {
                 btnEditAccountUsername.visibility = View.VISIBLE
@@ -340,16 +342,16 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                 etEditAccountValue.inputType = InputType.TYPE_CLASS_NUMBER
                 setOptionalElementsVisibility(1)
 
-                btnEditAccountCancel.setOnClickListener(View.OnClickListener {
+                btnEditAccountCancel.setOnClickListener {
                     clearEditField()
                     setOptionalElementsVisibility(0)
                     btnEditAccountPageGoal.visibility = View.VISIBLE
 
                     Toast.makeText(requireContext(), "Changes discarded", Toast.LENGTH_SHORT).show()
-                })
+                }
 
-                btnEditAccountSave.setOnClickListener(View.OnClickListener {
-                    if (checkEmpty() || !isNumeric(etEditAccountValue.text.toString().trim()))
+                btnEditAccountSave.setOnClickListener {
+                    if (checkEmpty(etEditAccountValue) || !isNumeric(etEditAccountValue.text.toString().trim()))
                         Toast.makeText(requireContext(), "Pages Goal field cannot be blank and must have a numeric value", Toast.LENGTH_SHORT).show()
                     else {
                         val wiz: UserModelClass = dbHandler!!.getWizard(MainActivity.userID!!)!!
@@ -366,24 +368,15 @@ class EditAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItem
                             Toast.makeText(requireContext(), "Successfully updated yearly page goal", Toast.LENGTH_SHORT).show()
                         }
                     }
-                })
+                }
             }
         }
     }
 
-    private fun checkEmpty(): Boolean {
-        if (etEditAccountValue.text.toString().trim() == "") {
-            return true
-        }
-        return false
-    }
 
-    private fun isNumeric(string: String): Boolean {
-        return string.all { char -> char.isDigit() }
-    }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        spinnerText = genres[p2].toString()
+        spinnerText = genres[p2]
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
