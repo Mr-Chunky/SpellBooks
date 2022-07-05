@@ -9,3 +9,9 @@ The app is built for users who have trouble keeping track of the physical hard-c
 
 * Android Studio (Chipmunk)
 * **Target:** API 23
+
+## Instructions
+
+_Side Note: This app is unreleased._
+
+If you would like to test the application, clone this repository and initialise a new Virtual Device with a minimum API target of 23, or connect a physical device to your machine that has a minimum API of 23.  Run the application and test the features!
