@@ -1,3 +1,15 @@
+#### 1.0.0 (2022-07-07)
+
+##### Chores
+
+* **testing:**  Add unit tests for database operations, add robolectric dependency ([13651e57](https://github.com/Mr-Chunky/SpellBooks/commit/13651e57b3cc33f1809641c45db318ef58ed25d5))
+* **fix:**  Enforce unique usernames, add username checking to database ([350617d9](https://github.com/Mr-Chunky/SpellBooks/commit/350617d9015eb8c8ee365d46b11f01f2dbb63420))
+
+##### Refactors
+
+* **maintenance:**  Remove re-used code, add Utility Class, clear unnecessary redundancies ([82ac8b81](https://github.com/Mr-Chunky/SpellBooks/commit/82ac8b8185334fa72a17cc93c3e9c03a58ed2ad5))
+
+------------------------------------------------------------------------
 ### 1.1.0 (2022-06-13)
 
 ##### Chores

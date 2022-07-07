@@ -12,6 +12,7 @@ import com.dean.spellbooks.SpellBooksUtils.Companion.checkEmpty
 
 class CreateAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnItemSelectedListener {
 
+    private var dbHandler: DBHandler? = null
     private var navigationController: NavController? = null
 
     private lateinit var etNewUserName: EditText
@@ -36,6 +37,7 @@ class CreateAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigationController = Navigation.findNavController(view)
+        dbHandler = DBHandler.getDBHandler(requireContext())
 
         initialiseUIElements(view)
 
@@ -79,9 +81,8 @@ class CreateAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
             val favouriteBook = etNewFavouriteBook.text.toString().trim()
             val bookGoal = etNewBookGoal.text.toString().trim().toInt()
             val pageGoal = etNewPageGoal.text.toString().trim().toInt()
-            val dbHandler: DBHandler = DBHandler.getDBHandler(requireContext())
 
-            val status = dbHandler.registerWizard(UserModelClass(null, username, password,
+            val status = dbHandler!!.registerWizard(UserModelClass(null, username, password,
                 favouriteGenre, favouriteBook, bookGoal, pageGoal, null))
 
             if (status > -1) {
@@ -100,8 +101,12 @@ class CreateAccountFragment : Fragment(), View.OnClickListener, AdapterView.OnIt
             navigationController!!.navigate(R.id.action_createAccountFragment_to_loginFragment)
             Toast.makeText(context, "Information discarded.  Returning to login page.", Toast.LENGTH_SHORT).show()
         } else if (p0.id == R.id.btnSaveCreateAccount) {
-            addNewWizard(p0)
-            navigationController!!.navigate(R.id.action_createAccountFragment_to_loginFragment)
+            if (!dbHandler!!.checkUsername(etNewUserName.text.toString().trim())) {
+                addNewWizard(p0)
+                navigationController!!.navigate(R.id.action_createAccountFragment_to_loginFragment)
+            }
+            else
+                Toast.makeText(requireContext(), "Username already exists", Toast.LENGTH_SHORT).show()
         }
     }
 

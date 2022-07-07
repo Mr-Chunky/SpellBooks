@@ -87,6 +87,27 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
         db!!.setForeignKeyConstraintsEnabled(true)
     }
 
+    // Drops tables in the database without creating new tables
+    fun resetDatabase() {
+        val database = this.writableDatabase
+
+        database.execSQL("DROP TABLE IF EXISTS $TABLE_BOOKS")
+        database.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
+
+        database.close()
+    }
+
+    // Drops tables in the database and proceeds to create new tables afterward
+    fun clearDatabase() {
+        val database = this.writableDatabase
+
+        database.execSQL("DROP TABLE IF EXISTS $TABLE_BOOKS")
+        database.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
+        onCreate(database)
+
+        database.close()
+    }
+
     // Add a new book to the books table of the database; currently used in CreateBookFragment.kt
     fun addBook(book: BookModelClass) : Long {
         val database = this.writableDatabase
@@ -361,6 +382,29 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
 
     // Makes sure that a username and password match with what is stored inside the database;
     // returns true if found in database and false if not found in database
+    fun checkUsername(username: String): Boolean {
+        val database = this.readableDatabase
+        var cursor: Cursor? = null
+
+        try {
+            cursor = database.query(TABLE_USERS, arrayOf(KEY_ID), "$KEY_NAME = ?",
+                arrayOf(username), null, null, null)
+        } catch (exception: SQLiteException) {
+            Log.e("sqlite","Error: Cannot parse the username provided.")
+        }
+
+        val cursorCount = cursor!!.count
+        cursor.close()
+        database.close()
+
+        if (cursorCount > 0)
+            return true
+
+        return false
+    }
+
+    // Makes sure that a username and password match with what is stored inside the database;
+    // returns true if found in database and false if not found in database
     fun checkUsernameAndPassword(username: String, password: String): Boolean {
         val database = this.readableDatabase
         var cursor: Cursor? = null
@@ -380,6 +424,25 @@ class DBHandler private constructor(context: Context) : SQLiteOpenHelper(context
             return true
 
         return false
+    }
+
+    // Fetches an integer representation of the amount of books currently attributed to a specific user
+    fun getUserBookCount(userID: Int): Int {
+        val database = this.readableDatabase
+        var cursor: Cursor? = null
+
+        try {
+            cursor = database.rawQuery("SELECT * FROM $TABLE_BOOKS WHERE $KEY_BOOK_OWNER = ?",
+                arrayOf(userID.toString().trim()))
+        } catch (exception: SQLiteException) {
+            Log.e("sqlite", "Error: Cannot parse user ID provided")
+        }
+
+        val count = cursor!!.count
+        cursor.close()
+        database.close()
+
+        return count
     }
 
     // Used after checkUsernameAndPassword() to hold a reference to that user's ID.  Currently
