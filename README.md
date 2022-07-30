@@ -32,4 +32,4 @@ _Unique usernames are enforced under the hood and the user will not be allowed t
 
 _Side Note: This app is unreleased._
 
-If you would like to view the source code associated with this project, 
+If you would like to view the source code associated with this project, navigate to **app/src/main/java/com/dean/SpellBooks** to view all of the associated fragments, the main activity and the helper classes.
