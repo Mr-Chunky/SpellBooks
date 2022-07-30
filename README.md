@@ -10,8 +10,26 @@ The app is built for users who have trouble keeping track of the physical hard-c
 * Android Studio (Chipmunk)
 * **Target:** API 23
 
+## Demonstration
+
+### Step 1: Create an account and log in.
+_Unique usernames are enforced under the hood and the user will not be allowed to create a new account if the username they have chosen already exists._
+
+![login-process](img/login-process.gif)
+
+### Step 2: View account details and edit those details as the user wishes.
+
+![edit-account-process](img/edit-account-process.gif)
+
+### Step 3: Create a new book to add to the user's list of owned books.
+
+![create-book-process](img/create-book-process.gif)
+
+### Step 4: View the book's details by tapping on the book in the dedicated RecyclerView that contains it.  Thereafter, the user may choose to edit any of the book's details, including a custom picture from their device to represent said book.  Finally, log out of the application.
+
+![edit-book-process](img/edit-book-process.gif)
 ## Instructions
 
 _Side Note: This app is unreleased._
 
-If you would like to test the application, clone this repository and initialise a new Virtual Device with a minimum API target of 23, or connect a physical device to your machine that has a minimum API of 23.  Run the application and test the features!
+If you would like to view the source code associated with this project, 
